@@ -1,0 +1,46 @@
+<%= form_with(model: entry, local: true) do |form| %>
+
+  <% if entry.errors.any? %>
+    <div>
+      <ul>
+        <% entry.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :text, "Entry Text" %>
+    <%= form.text_area :text, rows: 5, placeholder: 'Write your entry here...' %>
+  </div>
+
+  <div>
+    <%= form.label :emotion %>
+    <%= form.select :emotion, options_for_select(['Happy', 'Sad', 'Excited', 'Angry', 'Anxious', 'Other'], entry.emotion), { prompt: 'Select Emotion' } %>
+  </div>
+
+  <div>
+    <%= form.label :location %>
+    <%= form.text_field :location, placeholder: 'Where are you?' %>
+  </div>
+
+  <div>
+    <%= form.label :people, "People Involved" %>
+    <%= form.text_field :people, placeholder: 'Who are you with?' %>
+  </div>
+
+  <div>
+    <%= form.label :activity %>
+    <%= form.text_field :activity, placeholder: 'What are you doing?' %>
+  </div>
+
+  <div>
+    <%= form.label :energy_level, "Energy Level (1-10)" %>
+    <%= form.number_field :energy_level, in: 1..10, step: 1, placeholder: 'Rate your energy level' %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  entry: one
+  emote: MyText
+
+two:
+  entry: two
+  emote: MyText

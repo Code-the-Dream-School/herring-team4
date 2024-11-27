@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  text: MyString
+  emotion: MyString
+  location: MyString
+  people: MyString
+  activity: MyString
+  energy_level: 1
+
+two:
+  user: two
+  text: MyString
+  emotion: MyString
+  location: MyString
+  people: MyString
+  activity: MyString
+  energy_level: 1

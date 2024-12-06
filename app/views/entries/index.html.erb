@@ -1,0 +1,36 @@
+<h1>My Entries</h1>
+
+<%= link_to 'New Entry', new_entry_path %>
+
+<table>
+  <thead>
+  <tr>
+    <th>Text</th>
+    <th>Emotion</th>
+    <th>Location</th>
+    <th>People</th>
+    <th>Activity</th>
+    <th>Energy Level</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @entries.each do |entry| %>
+    <tr>
+      <td><%= entry.text.truncate(50) %></td>
+      <td><%= entry.emotion %></td>
+      <td><%= entry.location %></td>
+      <td><%= entry.people %></td>
+      <td><%= entry.activity %></td>
+      <td><%= entry.energy_level %>/10</td>
+      <td>
+        <%= link_to 'Show', entry %>
+        <%= link_to 'Edit', edit_entry_path(entry)%>
+        <%= button_to 'Delete', entry, method: :delete %>
+
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,33 @@
+<h1><%= @entry.text.truncate(50) %></h1>
+
+<p>
+  <strong>Emotion:</strong>
+  <%= @entry.emotion %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @entry.location %>
+</p>
+
+<p>
+  <strong>People Involved:</strong>
+  <%= @entry.people %>
+</p>
+
+<p>
+  <strong>Activity:</strong>
+  <%= @entry.activity %>
+</p>
+
+<p>
+  <strong>Energy Level:</strong>
+  <%= @entry.energy_level %>/10
+</p>
+
+<p>
+  <strong>Created At:</strong>
+  <%= @entry.created_at.strftime("%B %d, %Y %H:%M") %>
+</p>
+
+<%= link_to 'Edit', edit_entry_path(@entry) %> |<%= link_to 'Back to Entries', entries_path %>

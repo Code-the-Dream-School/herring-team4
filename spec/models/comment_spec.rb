@@ -1,26 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  it 'is valid with valid attributes' do
-    comment = build(:comment)
-    expect(comment).to be_valid
+  subject { Comment.new(user: create(:user), entry: create(:entry)) }
+
+  it "is valid with valid attributes" do
+    expect(subject).to be_valid
   end
 
-  it 'belongs to an entry' do
-    should belong_to(:entry)
+  it "is not valid without a user_id" do
+    subject.user = nil
+    expect(subject).to_not be_valid
   end
 
-  it 'belongs to a user' do
-    should belong_to(:user)
+  it "is not valid without an entry_id" do
+    subject.entry = nil
+    expect(subject).to_not be_valid
   end
 
-  it 'is invalid without a user_id' do
-    comment = build(:comment, user_id: nil)
-    expect(comment).not_to be_valid
+  it "belongs to an entry" do
+    expect(Comment.reflect_on_association(:entry).macro).to eq(:belongs_to)
   end
 
-  it 'is invalid without an entry_id' do
-    comment = build(:comment, entry_id: nil)
-    expect(comment).not_to be_valid
+  it "belongs to a user" do
+    expect(Comment.reflect_on_association(:user).macro).to eq(:belongs_to)
   end
 end

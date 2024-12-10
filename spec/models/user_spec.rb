@@ -1,23 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  it 'is valid with valid attributes' do
-    user = build(:user)  
-    expect(user).to be_valid
+  subject { User.create(email: "user@example.com", password: "password") }
+
+  it "is valid with valid attributes" do
+    expect(subject).to be_valid
   end
 
-  it 'is invalid without an email' do
-    user = build(:user, email: nil)
-    expect(user).not_to be_valid
+  it "is not valid without an email" do
+    subject.email = nil
+    expect(subject).to_not be_valid
   end
 
-  it 'is invalid with a duplicate email' do
-    create(:user, email: 'user@example.com')
-    user = build(:user, email: 'user@example.com')
-    expect(user).not_to be_valid
+  it "is not valid with a duplicate email" do
+    subject2 = User.create(email: subject.email, password: "password")
+    expect(subject2).to_not be_valid
   end
 
-  it 'has many entries' do
-    should have_many(:entries)
+  it "has many entries" do
+    expect(User.reflect_on_association(:entries).macro).to eq(:has_many)
   end
 end

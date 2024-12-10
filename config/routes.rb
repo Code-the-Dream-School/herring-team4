@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
+  resources :users
 
-  devise_for :users
+
+  resources :friendships, only: [:index] do
+    post :add_friend, on: :collection
+    delete :remove_friend, on: :collection
+  end
+
 
   resources :entries
 

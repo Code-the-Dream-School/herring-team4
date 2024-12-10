@@ -10,7 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_23_080924) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_27_050712) do
+  create_table "comments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "entry_id", null: false
+    t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entry_id"], name: "index_comments_on_entry_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "text"
+    t.string "emotion"
+    t.string "location"
+    t.string "people"
+    t.string "activity"
+    t.integer "energy_level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_entries_on_user_id"
+  end
+
+  create_table "reactions", force: :cascade do |t|
+    t.integer "entry_id", null: false
+    t.text "emote"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entry_id"], name: "index_reactions_on_entry_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -23,4 +54,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_23_080924) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comments", "entries"
+  add_foreign_key "comments", "users"
+  add_foreign_key "entries", "users"
+  add_foreign_key "reactions", "entries"
 end

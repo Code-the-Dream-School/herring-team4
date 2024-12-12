@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'dashboard/index'
 
+  devise_for :users
+
   resources :friendships, only: [:index] do
     post :add_friend, on: :collection
     delete :remove_friend, on: :collection

@@ -5,7 +5,7 @@ FactoryBot.define do
     emotion { Faker::Emotion.noun }
     location { Faker::Address.city }
     people { Faker::Name.name }
-    activity { Faker::Activity.name }
+    activity { Faker::Hobby.activity }
     energy_level { rand(1..10) }
   end
 end

@@ -19,35 +19,26 @@ class User < ApplicationRecord
     other_user.friendships.find_by(friend: self).destroy
   end
 
-  def check_streak()
+  def calculate_streak
 
     current_date = Date.current
-    current_entry = 0
     streak = 0
 
-    entry_dates = self.entries.select("DATE(created_at) AS unique_date").group("DATE(created_at)").order(created_at: :desc)
+    entry_dates = self.entries
+                      .group("DATE(created_at)")
+                      .order("DATE(created_at) DESC")
+                      .pluck("DATE(created_at)")
 
-    # check if date of first entry is today, if so, add 1 to streak
-    if Date.parse(entry_dates[current_entry].unique_date) == current_date
-      current_entry = current_entry + 1
-      streak = streak + 1
-    end
-
-    current_date = current_date - 1
-
-    is_streak = true
-    while is_streak
-      if Date.parse(entry_dates[current_entry].unique_date) == current_date
-        current_entry = current_entry + 1
-        streak = streak + 1
-        current_date = current_date - 1
+    entry_dates.each do | entry_date |
+      if Date.parse(entry_date) === current_date
+        streak += 1
+        current_date -= 1
       else
-        is_streak = false
+        break
       end
-
     end
 
-    puts streak
+    streak
 
   end
 end

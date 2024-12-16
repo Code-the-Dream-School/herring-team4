@@ -3,6 +3,14 @@ Rails.application.routes.draw do
 
   get 'dashboard/index'
 
+
+
+  resources :friendships, only: [:index] do
+    post :add_friend, on: :collection
+    delete :remove_friend, on: :collection
+  end
+
+
   resources :entries
 
   resources :users, only: [:show, :edit, :update]

@@ -1,0 +1,13 @@
+<%= form_with url: add_friend_friendships_path, method: :post do |f| %>
+  <%= f.label :email, "Add Friend by Email" %>
+  <%= f.text_field :email %>
+  <%= f.submit "Add Friend" %>
+<% end %>
+
+<% @friends.each do |friend| %>
+  <p>
+    <%= friend.email %>
+    <%= button_to "Remove Friend", remove_friend_friendships_path(email: friend.email), method: :delete %>
+  </p>
+<% end %>
+

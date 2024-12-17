@@ -8,7 +8,9 @@ class User < ApplicationRecord
 
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships, source: :friend
+  has_many :entries 
 
+  
   def add_friend(other_user)
     friendships.create(friend: other_user)
     other_user.friendships.create(friend: self)

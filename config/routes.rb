@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :users
+
   get 'dashboard/index'
 
-  devise_for :users
+
 
   resources :friendships, only: [:index] do
     post :add_friend, on: :collection
@@ -22,4 +24,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   # root to: "home#index"
+  root to: "dashboard#index"
 end

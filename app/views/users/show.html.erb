@@ -1,2 +1,21 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="container mt-4">
+  <div class="card mb-3 shadow-sm" style="max-width: 600px; margin: 0 auto;">
+    <div class="row g-0">
+      <% if @user.profile_picture.attached? %>
+        <div class="col-md-4">
+          <%= image_tag @user.profile_picture, class: "img-fluid rounded-start", alt: "Profile picture of #{@user.first_name}" %>
+        </div>
+      <% end %>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title"><%= @user.first_name %> <%= @user.last_name %></h5>
+          <% if @user.bio.present? %>
+            <p class="card-text"><%= @user.bio %></p>
+          <% else %>
+            <p class="card-text text-muted">No bio available.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

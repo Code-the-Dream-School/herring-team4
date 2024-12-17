@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get 'dashboard/index'
 
-
+  get 'profile', to: 'users#show', as: 'profile'
 
   resources :friendships, only: [:index] do
     post :add_friend, on: :collection

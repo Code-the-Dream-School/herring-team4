@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'comment/index'
+  get 'comment/view'
+  get 'comment/new'
+  get 'comment/edit'
   devise_for :users
 
   get 'dashboard/index'

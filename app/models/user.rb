@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :entries, dependent: :destroy
 
+  has_many :comments
+
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships, source: :friend
   has_many :entries 
@@ -21,6 +23,9 @@ class User < ApplicationRecord
     other_user.friendships.find_by(friend: self).destroy
   end
 
+  def friend_of?(other_user)
+    friends.include?(other_user)
+  end
 
 
 end

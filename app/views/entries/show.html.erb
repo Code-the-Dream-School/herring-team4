@@ -31,3 +31,19 @@
 </p>
 
 <%= link_to 'Edit', edit_entry_path(@entry) %> |<%= link_to 'Back to Entries', entries_path %>
+
+<h3> Comments </h3>
+<% @entry.comments.each do |comment| %>
+  <div>
+  <strong><%= comment.user.name %>: </strong>
+  <%= comment.text %>
+  <%= link_to 'View', entry_comment_path(@entry, @comment) %> |
+  <% if comment.user == current_user %>
+   <%= link_to 'Edit', edit_entry_comment_path(@entry, @comment) %> |
+   <%= link_to 'Delete', entry_comment_path(@entry, @comment), metod: :delete, data: {confirm: 'Are you sure?'} %>
+   <% end %>
+   </div> 
+
+   <%end%>
+
+   <%= link_to 'Add a comment', new_entry_comment_path(@entry) if current_user.friend_of?(@entry.user) %>

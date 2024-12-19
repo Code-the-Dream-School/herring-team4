@@ -1,0 +1,24 @@
+
+<%= form_with model: [@entry, @entry.comments.build], local: true do |f| %>
+  <% if f.object.errors.any? %>
+    <div >
+      <h2><%= pluralize(f.object.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+        <% f.object.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :comment %>
+    <%= f.text_area :text %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit 'Create Comment' %>
+  </div>
+<% end %>

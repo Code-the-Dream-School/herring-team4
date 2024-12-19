@@ -1,0 +1,11 @@
+<h1>Comment</h1>
+
+
+<% if @comment.present? %>
+  <%= render @comment %>
+<% else %>
+  <p>No comment found.</p>
+  
+<% end %>
+  <%= link_to 'Edit', edit_entry_comment_path(@entry, @comment) %> |
+  <%= link_to 'Back to Entry', @entry %>

@@ -1,2 +1,16 @@
-<h1>Comment#edit</h1>
-<p>Find me in app/views/comment/edit.html.erb</p>
+
+<h1>Edit comment</h1>
+
+<%= form_with model: [@entry, @comment], local: true do |f| %>
+    <div>
+    <%= f.label :text, "Edit your comment:" %><br>
+    <%= f.text_area :text, value: @comment.text %>
+    </div>
+    <%= f.submit 'Update' %>
+
+<br>
+<% end %>
+<div>
+  <%= link_to "Show this comment", @comment %> |
+  <%= link_to "Back to comment", comments_path %>
+</div>

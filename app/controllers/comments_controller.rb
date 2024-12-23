@@ -1,4 +1,4 @@
-class CommentController < ApplicationController
+class CommentsController < ApplicationController
 rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
 
 before_action :set_entry

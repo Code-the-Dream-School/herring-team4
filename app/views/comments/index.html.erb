@@ -3,12 +3,11 @@
 
 
 <% @comments.each do |comment| %>
-  <div>  
+  <div> 
+  <p> <%= comment.user.email %> : </p> 
     <p>
-    # <strong> <%= comment.user.username %>:</strong> Add once username is added (might need to change)
     <%= comment.text %>
    </p> 
-
    </div>
 
    <% end %>

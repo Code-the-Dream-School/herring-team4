@@ -11,6 +11,6 @@
 <br>
 <% end %>
 <div>
-  <%= link_to "Show this comment", @comment %> |
-  <%= link_to "Back to comment", comments_path %>
+  <%= link_to "Show this comment", entry_comments_path(@entry, @comment) %> |
+  <%= link_to "Back to comment", entry_comments_path(@entry) %>
 </div>

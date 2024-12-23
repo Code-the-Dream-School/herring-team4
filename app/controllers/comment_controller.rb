@@ -10,10 +10,7 @@ before_action :authorize_friend!
   end
 
   def show
-     @comment
-    unless @comment
-      redirect_to @entry, notice: "Comment not found."
-    end
+
   end
 
   def new
@@ -74,7 +71,7 @@ before_action :authorize_friend!
   def catch_not_found(e)
     Rails.logger.debug("We had a not found exception.")
     flash.alert = e.to_s
-    redirect_to comment_show_path
+    redirect_to root_path
   end
 
 end

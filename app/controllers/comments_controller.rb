@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
 rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
 
+before_action :authenticate_user!
 before_action :set_entry
 before_action :set_comment, only: [:show, :edit, :update, :destroy]
 before_action :authorize_friend!

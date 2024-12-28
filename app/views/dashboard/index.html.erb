@@ -2,12 +2,16 @@
 
 <%= link_to 'Profile', profile_path %>
 
-<%= link_to 'Entries', entries_path %>
+<div class="header-actions">
+  <%= link_to 'Profile', profile_path, class:'new-entry-button' %>
+  <%=  link_to 'Entries', entries_path , class: 'new-entry-button' %>
+  <%= link_to 'Sign out', destroy_user_session_path,   data: { turbo_method: :delete }, class: 'new-entry-button' %>
+  <%= link_to 'Friends', friend_entries_path, class: 'new-entry-button' %>
+</div>
+
 
 <% if current_user.notification %>
   <%= link_to 'Schedule', notification_path(current_user.notification) %>
 <% else %>
   <%= link_to 'Schedule', new_notification_path %>
 <% end %>
-
-<%= link_to 'Sign out', destroy_user_session_path,   data: { turbo_method: :delete } %>

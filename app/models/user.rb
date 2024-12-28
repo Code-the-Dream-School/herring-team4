@@ -9,6 +9,9 @@ class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships, source: :friend
 
+  validates :username, presence: true, uniqueness: true
+  validates :bio, length: { maximum: 500 }
+
   def add_friend(other_user)
     friendships.create(friend: other_user)
     other_user.friendships.create(friend: self)

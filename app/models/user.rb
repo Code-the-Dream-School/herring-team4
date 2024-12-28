@@ -7,9 +7,13 @@ class User < ApplicationRecord
   has_many :entries, dependent: :destroy
 
   has_many :friendships, dependent: :destroy
-  has_many :friends, through: :friendships, source: :friend
-  has_many :entries 
 
+  has_many :inverse_friendships, class_name: "Friendship",
+           foreign_key: "friend_id",
+           dependent: :destroy
+
+  has_many :reactions, dependent: :destroy
+  has_many :comments, dependent: :destroy
   
   def add_friend(other_user)
     friendships.create(friend: other_user)

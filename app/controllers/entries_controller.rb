@@ -39,6 +39,10 @@ class EntriesController < ApplicationController
     redirect_to entries_url, notice: 'Entry destroyed.'
   end
 
+  def friends_entries
+    @entries = Entry.where(user: current_user.friends)
+  end
+
   private
 
   def set_entry

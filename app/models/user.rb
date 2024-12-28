@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :friends, through: :friendships, source: :friend
   has_many :entries 
 
+  after_commit :add_default_profile_picture, on: %i[create]
+
   validates :username, presence: true, uniqueness: true
   validates :bio, length: { maximum: 500 }
   def add_friend(other_user)
@@ -43,5 +45,17 @@ class User < ApplicationRecord
 
     streak
 
+  end
+
+  private
+
+  def add_default_profile_picture
+    unless profile_picture.attached?
+      profile_picture.attach(
+        io: File.open(Rails.root.join('app', 'assets', 'images', 'default.png')),
+        filename: 'default.png',
+        content_type: 'image/png'
+      )
+    end
   end
 end

@@ -1,4 +1,4 @@
 class Entry < ApplicationRecord
   belongs_to :user
-  has_many :reactions
+  has_many :reactions, dependent: :destroy
 end

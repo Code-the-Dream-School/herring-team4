@@ -4,4 +4,6 @@
 
 <%= link_to 'Entries', entries_path %>
 
+<%= link_to 'Schedule', notification_path(current_user.notification || Notification.new(user: current_user)) %>
+
 <%= link_to 'Sign out', destroy_user_session_path,   data: { turbo_method: :delete } %>

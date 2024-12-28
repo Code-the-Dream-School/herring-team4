@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :friends, through: :friendships, source: :friend
   has_many :entries 
 
+  has_one :notification, dependent: :destroy
+
   validates :username, presence: true, uniqueness: true
   validates :bio, length: { maximum: 500 }
   def add_friend(other_user)

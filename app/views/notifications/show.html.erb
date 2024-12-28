@@ -1,0 +1,17 @@
+<h1 class="my-4">Notification Schedule</h1>
+
+<%= form_for @notification do |f| %>
+  <div class="form-group">
+    <%= f.label :days_of_week, "Select Days", class: "form-label" %>
+    <%= f.select :days_of_week, options_for_select(['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], @notification.days_of_week), { multiple: true, class: "form-control" } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :time, "Select Time", class: "form-label" %>
+    <%= f.time_select :time, default: @notification.time, class: "form-control" %>
+  </div>
+
+  <div class="form-group mt-3">
+    <%= f.submit "Save Schedule", class: "btn btn-primary" %>
+  </div>
+<% end %>

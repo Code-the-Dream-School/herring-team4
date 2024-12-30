@@ -5,7 +5,8 @@ class User < ApplicationRecord
         :recoverable, :rememberable, :validatable
 
   has_many :entries, dependent: :destroy
-
+  has_one_attached :profile_picture
+  
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships, source: :friend
   has_many :entries 

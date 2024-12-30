@@ -7,5 +7,6 @@
   <p>No comment found.</p>
 
 <% end %>
-  <%= link_to 'Edit', edit_entry_comment_path(@entry, @comment) %> |
-  <%= link_to 'Back to Entry', @entry %>
+  <%= link_to 'Edit', edit_entry_comment_path(@entry, @comment), class: "btn btn-primary" %> |
+  <%= link_to 'My Entries', @entry, class: "btn btn-primary" %>
+  <%= link_to 'Friends Entries', friend_entries_path, class: "btn btn-primary" %>

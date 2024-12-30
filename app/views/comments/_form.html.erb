@@ -13,12 +13,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :comment %>
     <%= f.text_area :text %>
   </div>
 
 
   <div class="actions">
-    <%= f.submit 'Create Comment' %>
+    <%= f.submit 'Comment', class: "btn btn-primary" %>
   </div>
 <% end %>

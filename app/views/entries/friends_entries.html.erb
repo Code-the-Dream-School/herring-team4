@@ -1,6 +1,6 @@
 <h1>My Friend's Entries</h1>
 
-<%= link_to 'New Entry', new_entry_path %>
+<%= link_to 'My Entries', entries_path %>
 
 <table>
   <thead>
@@ -14,6 +14,7 @@
     <th>Energy Level</th>
     <th>Actions</th>
     <th>Reactions</th>
+    <th>Comments</th>
   </tr>
   </thead>
 
@@ -42,6 +43,17 @@
           <p><strong><%= reaction.user.email %>:</strong> <%= reaction.emote %></p>
         <% end %>
       </td>
+
+      <td>
+<% entry.comments.each do |comment| %>
+  <p>
+  <strong><%= comment.user.email %>: </strong>
+  <%= comment.text %>
+   </p> 
+
+   <%end%>
+<%= link_to 'Comment', new_entry_comment_path(entry), class: "btn btn-primary" %>
+   </td>
 
     </tr>
   <% end %>

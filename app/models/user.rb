@@ -15,6 +15,9 @@ class User < ApplicationRecord
   has_many :reactions, dependent: :destroy
   has_many :comments, dependent: :destroy
   
+  validates :username, presence: true, uniqueness: true
+  validates :bio, length: { maximum: 500 }
+
   def add_friend(other_user)
     friendships.create(friend: other_user)
     other_user.friendships.create(friend: self)
@@ -25,6 +28,26 @@ class User < ApplicationRecord
     other_user.friendships.find_by(friend: self).destroy
   end
 
+  def calculate_streak
 
+    current_date = Date.current
+    streak = 0
 
+    entry_dates = self.entries
+                      .group("DATE(created_at)")
+                      .order("DATE(created_at) DESC")
+                      .pluck("DATE(created_at)")
+
+    entry_dates.each do | entry_date |
+      if Date.parse(entry_date) === current_date
+        streak += 1
+        current_date -= 1
+      else
+        break
+      end
+    end
+
+    streak
+
+  end
 end

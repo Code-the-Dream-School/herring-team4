@@ -14,16 +14,17 @@ users = []
 
 users << User.create!(email: "admin@example.com", password: "password", password_confirmation: "password")
 
-#create 10 other users
+# create 10 other users
 10.times do |i|
   users << User.create!(
     email: Faker::Internet.unique.email,
+
     password: "password",
     password_confirmation: "password"
   )
 end
 
-#make all users friends with user 1
+# make all users friends with user 1
 first_user = users[0]
 users[1..].each do |friend|
   Friendship.create!(user_id: first_user.id, friend_id: friend.id)
@@ -42,7 +43,7 @@ users.each do |user|
   end
 end
 
-#user1 adds reactions to each post
+# user1 adds reactions to each post
 other_users_entries = Entry.where.not(user_id: first_user.id)
 other_users_entries.each do |entry|
   Reaction.create!(

@@ -40,7 +40,7 @@ class EntriesController < ApplicationController
   end
 
   def friends_entries
-    @entries = Entry.where(user: current_user.friends)
+    @entries = Entry.where(user: current_user.friendships)
   end
 
   private

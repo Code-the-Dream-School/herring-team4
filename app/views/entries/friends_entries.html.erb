@@ -1,0 +1,49 @@
+<h1>My Friend's Entries</h1>
+
+<%= link_to 'New Entry', new_entry_path %>
+
+<table>
+  <thead>
+  <tr>
+    <th>User</th>
+    <th>Text</th>
+    <th>Emotion</th>
+    <th>Location</th>
+    <th>People</th>
+    <th>Activity</th>
+    <th>Energy Level</th>
+    <th>Actions</th>
+    <th>Reactions</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @entries.each do |entry| %>
+    <tr>
+      <td><%= entry.user.email %></td>
+      <td><%= entry.text.truncate(50) %></td>
+      <td><%= entry.emotion %></td>
+      <td><%= entry.location %></td>
+      <td><%= entry.people %></td>
+      <td><%= entry.activity %></td>
+      <td><%= entry.energy_level %>/10</td>
+
+      <td>
+        <%= form_with model: Reaction.new, url: reactions_path, local: true do |form| %>
+          <%= form.hidden_field :entry_id, value: entry.id %>
+          <%= form.text_area :emote, placeholder: "Add your reaction" %>
+          <%= form.submit "React" %>
+        <% end %>
+      </td>
+
+      <td>
+
+        <% entry.reactions.each do |reaction| %>
+          <p><strong><%= reaction.user.email %>:</strong> <%= reaction.emote %></p>
+        <% end %>
+      </td>
+
+    </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -8,6 +8,16 @@ Rails.application.routes.draw do
   get 'dashboard/index'
 
 
+  get "friend/entries" => "entries#friends_entries"
+
+  resources :reactions, only: [:create]
+
+  resources :entries do
+    resources :reactions, only: [:new, :create]
+  end
+
+  get 'profile', to: 'users#show', as: 'profile'
+
 
   resources :friendships, only: [:index] do
     post :add_friend, on: :collection

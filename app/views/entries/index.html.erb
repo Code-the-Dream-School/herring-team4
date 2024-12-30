@@ -1,36 +1,19 @@
 <h1>My Entries</h1>
 
-<%= link_to 'New Entry', new_entry_path %>
+<div class="header-actions">
+  <%= link_to 'New Entry', new_entry_path, class: 'new-entry-button' %>
+  <%= link_to 'Dashboard', dashboard_index_path, class: 'new-entry-button' %>
+</div>
 
-<table>
-  <thead>
-  <tr>
-    <th>Text</th>
-    <th>Emotion</th>
-    <th>Location</th>
-    <th>People</th>
-    <th>Activity</th>
-    <th>Energy Level</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-
-  <tbody>
+<div class="entries-container">
   <% @entries.each do |entry| %>
-    <tr>
-      <td><%= entry.text.truncate(50) %></td>
-      <td><%= entry.emotion %></td>
-      <td><%= entry.location %></td>
-      <td><%= entry.people %></td>
-      <td><%= entry.activity %></td>
-      <td><%= entry.energy_level %>/10</td>
-      <td>
-        <%= link_to 'Show', entry %>
-        <%= link_to 'Edit', edit_entry_path(entry)%>
-        <%= button_to 'Delete', entry, method: :delete %>
-
-      </td>
-    </tr>
+    <div class="entry-card">
+      <h2 class="entry-title"><%= entry.text %></h2>
+      <div class="entry-actions">
+        <%= link_to 'Show', entry, class: 'action-button show-button' %>
+        <%= link_to 'Edit', edit_entry_path(entry), class: 'action-button edit-button' %>
+        <%= button_to 'Delete', entry, method: :delete, class: 'action-button delete-button' %>
+      </div>
+    </div>
   <% end %>
-  </tbody>
-</table>
+</div>

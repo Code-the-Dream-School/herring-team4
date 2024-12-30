@@ -2,6 +2,9 @@
 
 <%= link_to 'Profile', profile_path %>
 
-<%= link_to 'Entries', entries_path %>
-
-<%= link_to 'Sign out', destroy_user_session_path,   data: { turbo_method: :delete } %>
+<div class="header-actions">
+  <%= link_to 'Profile', profile_path, class:'new-entry-button' %>
+  <%=  link_to 'Entries', entries_path , class: 'new-entry-button' %>
+  <%= link_to 'Sign out', destroy_user_session_path,   data: { turbo_method: :delete }, class: 'new-entry-button' %>
+  <%= link_to 'Friends', friend_entries_path, class: 'new-entry-button' %>
+</div>

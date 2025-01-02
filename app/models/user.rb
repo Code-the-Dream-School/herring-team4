@@ -7,6 +7,9 @@ class User < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_one_attached :profile_picture
   
+
+  has_many :comments
+
   has_many :friendships, dependent: :destroy
 
   has_many :inverse_friendships, class_name: "Friendship",
@@ -28,6 +31,11 @@ class User < ApplicationRecord
     friendships.find_by(friend: other_user).destroy
     other_user.friendships.find_by(friend: self).destroy
   end
+
+  def friend_of?(other_user)
+    friends.include?(other_user)
+  end
+
 
   def calculate_streak
 

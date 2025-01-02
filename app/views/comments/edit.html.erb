@@ -1,0 +1,16 @@
+
+<h1>Edit comment</h1>
+
+<%= form_with model: [@entry, @comment], local: true do |f| %>
+    <div>
+    <%= f.label :text, "Edit your comment:" %><br>
+    <%= f.text_area :text, value: @comment.text %>
+    </div>
+    <%= f.submit 'Update' %>
+
+<br>
+<% end %>
+<div>
+  <%= link_to "Show this comment", entry_comments_path(@entry, @comment) %> |
+  <%= link_to "Back to comment", entry_comments_path(@entry) %>
+</div>

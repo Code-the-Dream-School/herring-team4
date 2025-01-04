@@ -33,7 +33,7 @@ class User < ApplicationRecord
   end
 
   def friend_of?(other_user)
-    friends.include?(other_user)
+    friendships.include?(other_user)
   end
 
 

@@ -3,7 +3,7 @@ class FriendshipsController < ApplicationController
   before_action :set_friend, only: [:add_friend, :remove_friend]
 
   def index
-    @friends = current_user.friends
+    @friends = current_user.friendships
   end
 
   def add_friend

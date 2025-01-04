@@ -6,8 +6,8 @@
 
 <% @friends.each do |friend| %>
   <p>
-    <%= friend.email %>
-    <%= button_to "Remove Friend", remove_friend_friendships_path(email: friend.email), method: :delete %>
+    <%= friend.user.email %>
+    <%= button_to "Remove Friend", remove_friend_friendships_path(email: friend.user.email), method: :delete %>
   </p>
 <% end %>
 

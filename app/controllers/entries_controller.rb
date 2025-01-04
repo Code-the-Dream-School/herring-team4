@@ -40,7 +40,9 @@ class EntriesController < ApplicationController
   end
 
   def friends_entries
-    @entries = Entry.where(user: current_user.friends)
+    @entries = Entry.where(user: current_user.friendships)
+    @entries = Entry.includes(:comments).where(user: current_user.friends)
+    @comment = Comment.new
   end
 
   private

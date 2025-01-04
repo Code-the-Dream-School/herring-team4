@@ -41,7 +41,7 @@ class EntriesController < ApplicationController
 
   def friends_entries
     @entries = Entry.where(user: current_user.friendships)
-    @entries = Entry.includes(:comments).where(user: current_user.friends)
+    @entries = Entry.includes(:comments).where(user: current_user.friendships)
     @comment = Comment.new
   end
 

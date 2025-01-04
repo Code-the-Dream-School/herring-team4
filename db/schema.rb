@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_28_221624) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_28_225921) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -72,6 +72,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_28_221624) do
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "days_of_week", default: "", null: false
+    t.time "time", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "reactions", force: :cascade do |t|
     t.integer "entry_id", null: false
     t.text "emote"
@@ -104,6 +113,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_28_221624) do
   add_foreign_key "entries", "users"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "friend_id"
+  add_foreign_key "notifications", "users"
   add_foreign_key "reactions", "entries"
   add_foreign_key "reactions", "users"
 end

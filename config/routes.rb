@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'comments/index'
+  get 'comments/show'
+  get 'comments/new'
+  get 'comments/edit'
   devise_for :users
 
   get 'dashboard/index'
@@ -21,7 +25,9 @@ Rails.application.routes.draw do
   end
 
 
-  resources :entries
+  resources :entries do
+    resources :comments, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  end
 
   resources :users, only: [:show, :edit, :update]
 

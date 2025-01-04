@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "comments/show.html.erb", type: :view do
 let(:user) { FactoryBot.create(:user) }
-let(:friend) { FactoryBot.create(:user) }
+let(:friend) { FactoryBot.create(:user, username: "test_friend") }
 let(:entry) { FactoryBot.create(:entry, user: friend) }
 let(:comment) { FactoryBot.create(:comment, entry: entry, user: user, text: "Test comment") }
 
@@ -26,6 +26,10 @@ let(:comment) { FactoryBot.create(:comment, entry: entry, user: user, text: "Tes
   end
 
   it "displays the back to entry link" do
-    expect(rendered).to have_link("Back to Entry", href: entry_path(entry))
+    expect(rendered).to have_link("My Entries", href: entries_path)
+  end
+
+  it "displays my friends entries" do
+    expect(rendered).to have_link("Friends Entries", href: friend_entries_path)
   end
 end

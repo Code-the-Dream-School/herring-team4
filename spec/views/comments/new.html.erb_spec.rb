@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "comments/new.html.erb", type: :view do
-let(:user) { FactoryBot.create(:user, username: "test1") }
+let(:user) { FactoryBot.create(:user) }
 let(:entry) { FactoryBot.create(:entry, user: user) }
 let(:comment) { FactoryBot.create(:comment, entry: entry) }
 

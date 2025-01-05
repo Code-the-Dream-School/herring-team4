@@ -33,6 +33,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::ControllerHelpers, type: :controller
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')

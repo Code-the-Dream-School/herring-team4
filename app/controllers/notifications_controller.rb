@@ -1,5 +1,5 @@
 class NotificationsController < ApplicationController
-  before_action :set_notification, only: [:edit, :update]
+  before_action :set_notification, only: [:edit, :update, :show]
 
   def new
     @notification = current_user.build_notification
@@ -9,7 +9,11 @@ class NotificationsController < ApplicationController
   end
 
   def show
-    @notification = current_user.notification || Notification.new(user: current_user)
+    if @notification.new_record?
+      render :new
+    else
+      render :show
+    end
   end
 
   def create
@@ -17,7 +21,7 @@ class NotificationsController < ApplicationController
     if @notification.save
       redirect_to @notification, notice: 'Schedule was successfully created.'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -32,10 +36,10 @@ class NotificationsController < ApplicationController
   private
 
   def set_notification
-    @notification = current_user.notification
+    @notification = current_user.notification || current_user.build_notification
   end
 
   def notification_params
-    params.require(:notification).permit(:days_of_week, :time)
-  end
+    params.require(:notification).permit(:hour, :minute, :ampm, days_of_week: [])
+  end  
 end

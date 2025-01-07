@@ -1,0 +1,21 @@
+<%= form_with model: @notification, local: true do |f| %>
+  <div class="form-group">
+    <label>Days of the Week:</label>
+    <%= f.select :days_of_week, ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], {}, { multiple: true, class: "form-control" } %>
+  </div>
+
+  <div class="form-group">
+    <label>Time:</label>
+    <div class="d-flex">
+      <!-- Hour Dropdown -->
+      <%= f.select :hour, (1..12).to_a, { prompt: "Hour" }, class: "form-control" %>
+      <!-- Minute Dropdown -->
+      <%= f.select :minute, [0, 15, 30, 45].map { |m| [m.to_s.rjust(2, '0'), m] }, { prompt: "Minute" }, class: "form-control" %>
+      <!-- AM/PM Dropdown -->
+      <%= f.select :ampm, ["AM", "PM"], { prompt: "AM/PM" }, class: "form-control" %>
+    </div>
+  </div>
+
+  <%= f.submit "Save Schedule", class: "btn btn-primary" %>
+  <%= link_to 'Back to Dashboard', root_path, class: "btn btn-secondary" %>
+<% end %>

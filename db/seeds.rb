@@ -15,7 +15,7 @@ default_image_path = Rails.root.join('spec', 'fixtures', 'files', 'default.png')
 
 users << User.create!(
   username: "admin",
-  email: "admin@example.com",
+  email: "admin@admin.com",
   password: "password",
   password_confirmation: "password"
 )

@@ -11,11 +11,14 @@
 User.destroy_all
 
 users = []
+default_image_path = Rails.root.join('spec', 'fixtures', 'files', 'default.png')
 
 users << User.create!(
   username: "admin",
-  email: "admin@example.com", password: "password", password_confirmation: "password")
-
+  email: "admin@example.com",
+  password: "password",
+  password_confirmation: "password"
+)
 # create 10 other users
 10.times do |i|
   users << User.create!(
@@ -23,6 +26,15 @@ users << User.create!(
     username: Faker::Internet.unique.username,
     password: "password",
     password_confirmation: "password"
+  )
+end
+
+# add a default pic to each user
+users.each do |user|
+  user.profile_picture.attach(
+    io: File.open(default_image_path),
+    filename: 'default.png',
+    content_type: 'image/png'
   )
 end
 

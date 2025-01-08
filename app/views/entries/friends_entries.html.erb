@@ -1,61 +1,41 @@
 <h1>My Friend's Entries</h1>
 
-<%= link_to 'My Entries', entries_path %>
 
-<table>
-  <thead>
-  <tr>
-    <th>User</th>
-    <th>Text</th>
-    <th>Emotion</th>
-    <th>Location</th>
-    <th>People</th>
-    <th>Activity</th>
-    <th>Energy Level</th>
-    <th>Actions</th>
-    <th>Reactions</th>
-    <th>Comments</th>
-  </tr>
-  </thead>
+<div class="header-actions">
+  <%=  link_to 'My entries', entries_path , class: 'new-entry-button' %>
+  <%=  link_to 'Dashboard', dashboard_index_path , class: 'new-entry-button' %>
 
-  <tbody>
+</div>
+
+<div class="entries-container">
   <% @entries.each do |entry| %>
-    <tr>
-      <td><%= entry.user.email %></td>
-      <td><%= entry.text.truncate(50) %></td>
-      <td><%= entry.emotion %></td>
-      <td><%= entry.location %></td>
-      <td><%= entry.people %></td>
-      <td><%= entry.activity %></td>
-      <td><%= entry.energy_level %>/10</td>
+    <div class="entry-card">
+      <h3><strong>User:</strong> <%= entry.user.email %></h3>
+      <p><strong>Entry:</strong> <%= entry.text.truncate(50) %></p>
 
-      <td>
+      <div class="entry-actions">
         <%= form_with model: Reaction.new, url: reactions_path, local: true do |form| %>
           <%= form.hidden_field :entry_id, value: entry.id %>
-          <%= form.text_area :emote, placeholder: "Add your reaction" %>
-          <%= form.submit "React" %>
+          <%= form.text_area :emote, placeholder: "Add your reaction", class: 'reaction-input' %>
+          <%= form.submit "React", class: 'action-button react-button' %>
         <% end %>
-      </td>
+      </div>
 
-      <td>
-
+      <div class="entry-reactions">
         <% entry.reactions.each do |reaction| %>
           <p><strong><%= reaction.user.email %>:</strong> <%= reaction.emote %></p>
         <% end %>
-      </td>
+      </div>
+    </div>
 
-      <td>
-<% entry.comments.each do |comment| %>
-  <p>
-  <strong><%= comment.user.email %>: </strong>
-  <%= comment.text %>
-   </p> 
+    <% entry.comments.each do |comment| %>
+      <p>
+        <strong><%= comment.user.email %>: </strong>
+        <%= comment.text %>
+      </p>
 
-   <%end%>
-<%= link_to 'Comment', new_entry_comment_path(entry), class: "btn btn-primary" %>
-   </td>
+    <%end%>
+    <%= link_to 'Comment', new_entry_comment_path(entry), class: "btn btn-primary" %>
 
-    </tr>
   <% end %>
-  </tbody>
-</table>
+</div>

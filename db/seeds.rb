@@ -12,13 +12,15 @@ User.destroy_all
 
 users = []
 
-users << User.create!(email: "admin@example.com", password: "password", password_confirmation: "password")
+users << User.create!(
+  username: "admin",
+  email: "admin@example.com", password: "password", password_confirmation: "password")
 
 # create 10 other users
 10.times do |i|
   users << User.create!(
     email: Faker::Internet.unique.email,
-
+    username: Faker::Internet.unique.username,
     password: "password",
     password_confirmation: "password"
   )
@@ -39,7 +41,7 @@ users.each do |user|
       people: Faker::Name.name,
       activity: Faker::Hobby.activity,
       energy_level: rand(1..10),
-    )
+      )
   end
 end
 
@@ -52,4 +54,3 @@ other_users_entries.each do |entry|
     emote: "love"
   )
 end
-

@@ -10,6 +10,11 @@ class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships, source: :friend
 
+  scope :search_by_username_or_email, ->(query) {
+    where("username LIKE? OR email LIKE ? ", "%#{query}%","%#{query}%")
+  }
+
+
   has_one :notification, dependent: :destroy
 
   has_many :inverse_friendships, class_name: "Friendship",

@@ -11,3 +11,21 @@
   </p>
 <% end %>
 
+<%= form_with url: search_friendships_path, method: :get, local: true do |f| %>
+  <%= f.label :query, "Search for friends" %>
+  <%=f.text_field :query, placeholder: "Enter username or email" %>
+  <%= f.submit "Search" %>
+  <%end %> 
+
+  <% if @users&.any? %>
+   <ul>
+    <% @users.each do |user| %>
+     <li> 
+      <%= user.username %> (<%= user.email %>)
+      <% unless current_user.friendships.exists?(friend_id: user.id ) %>
+         <%= link_to "Add Friend", add_friend_friendships_path(email: user.email), method: :post %>
+        <% end %>
+     </li>
+     <% end %>
+    </ul> 
+      <% end %>  

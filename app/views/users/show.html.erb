@@ -1,18 +1,94 @@
 <div class="container mt-4">
-  <div class="card mb-3 shadow-sm" style="max-width: 600px; margin: 0 auto;">
-    <div class="row g-0">
-      <% if @user.profile_picture.attached? %>
-        <div class="col-md-4">
-          <%= image_tag @user.profile_picture, class: "img-fluid rounded-start", alt: "Profile picture of #{@user.first_name}" %>
-        </div>
-      <% end %>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title"><%= @user.username %> </h5>
-          <% if @user.bio.present? %>
-            <p class="card-text"><%= @user.bio %></p>
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body text-center">
+          <h3 class="card-title"><%= @user.username %></h3>
+
+          <% if @user.profile_picture.attached? %>
+            <%= image_tag @user.profile_picture, class: "img-fluid rounded-circle", alt: "Profile picture of #{@user.username}", style: "width: 150px; height: 150px; object-fit: cover;"  %>
           <% else %>
-            <p class="card-text text-muted">No bio available.</p>
+            <%= image_tag 'default.png', class: "img-fluid rounded-circle", alt: "Default profile picture" %>
+          <% end %>
+        
+          <%= form_with model: @user, url: upload_profile_picture_user_path(@user), method: :patch, local: true, enctype: "multipart/form-data" do |f| %>
+            <div class="form-group mt-3">
+              <%= f.file_field :profile_picture, class: 'form-control' %>
+            </div>
+            <%= f.submit 'Upload Picture', class: 'btn btn-primary mt-3' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h4>Bio</h4>
+          <%= form_with model: @user, url: update_bio_user_path(@user), method: :patch do |f| %>
+            <div class="form-group">
+              <%= f.text_area :bio, class: 'form-control', rows: 5, placeholder: "No bio yet" %>
+            </div>
+            <%= f.submit 'Update Bio', class: 'btn btn-primary mt-2' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h4>Friends</h4>
+          <div class="list-group">
+            <% @user.friends.each do |friend| %>
+              <a href="<%= profile_path(friend) %>" class="list-group-item list-group-item-action">
+                <%= image_tag(friend.profile_picture, class: 'img-thumbnail mr-2', alt: friend.username) if friend.profile_picture.attached? %>
+                <%= friend.username %>
+              </a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="mt-4">Your Entries</h4>
+          <% @user.entries.each do |entry| %>
+            <div class="card mb-3">
+              <div class="card-body">
+                <p><%= entry.text %></p>
+                <small><%= entry.created_at.strftime("%B %d, %Y") %></small>
+                
+                <div class="comments-section mt-3">
+                  <h5>Comments</h5>
+                  <div class="comments-container" style="max-height: 200px; overflow-y: auto;">
+                    <% entry.comments.each do |comment| %>
+                      <div class="comment">
+                        <div class="d-flex mb-2">
+                          <%= image_tag(comment.user.profile_picture, class: 'img-thumbnail mr-2', alt: comment.user.username) if comment.user.profile_picture.attached? %>
+                          <div>
+                            <strong><%= comment.user.username %></strong>
+                            <p><%= comment.text %></p>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+
+                  <%= form_with model: [entry, Comment.new], local: true do |f| %>
+                    <div class="form-group">
+                      <%= f.text_area :text, class: 'form-control', placeholder: 'Add a comment...' %>
+                    </div>
+                    <%= f.submit 'Post Comment', class: 'btn btn-primary btn-sm' %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
           <% end %>
         </div>
       </div>

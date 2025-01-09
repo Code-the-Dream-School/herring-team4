@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Comments", type: :request do
   let(:user) { FactoryBot.create(:user) }
-  let(:friend) { FactoryBot.create(:user, username: "friend_1") }
+  let(:friend) { FactoryBot.create(:user) }
   let(:entry) {FactoryBot.create(:entry, user: friend) }
   let(:comment) { FactoryBot.create(:comment, entry: entry, user: user) }
 

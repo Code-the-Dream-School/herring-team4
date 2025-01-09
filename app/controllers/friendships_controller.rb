@@ -6,6 +6,14 @@ class FriendshipsController < ApplicationController
     @friends = current_user.friendships
   end
 
+  def search
+    @query = params[:query]
+    @users = User.search_by_username_or_email(@query) if @query.present?
+
+    friend_ids = current_user.friendships.pluck(:friend_id)
+    @users = @users.where.not(id: current_user.id).or(User.where(id: friend_ids))
+  end
+
   def add_friend
     if current_user.add_friend(@friend)
       flash[:notice] = "#{@friend.email} has been added as a friend!"

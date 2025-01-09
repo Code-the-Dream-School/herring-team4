@@ -22,6 +22,9 @@ Rails.application.routes.draw do
   resources :friendships, only: [:index] do
     post :add_friend, on: :collection
     delete :remove_friend, on: :collection
+    collection do 
+      get :search
+    end
   end
 
 

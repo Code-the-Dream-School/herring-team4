@@ -29,7 +29,12 @@ Rails.application.routes.draw do
     resources :comments, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   end
 
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show, :edit, :update] do
+    member do
+      patch :update_bio
+      patch :upload_profile_picture
+    end
+  end
 
   resources :notifications, only: [:show, :edit, :update, :new, :create]
 

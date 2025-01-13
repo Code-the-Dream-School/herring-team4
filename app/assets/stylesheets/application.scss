@@ -18,8 +18,21 @@
 @font-face {
   font-family: 'TiemposHeadline-Medium';
   src: url('TiemposHeadline-Medium.otf') format('opentype');
-  font-weight: bold;
-  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TiemposHeadline-MediumItalic';
+  src: url('TiemposHeadline-MediumItalic.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'TiemposHeadline-Light';
+  src: url('TiemposHeadline-Light.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'TiemposHeadline-Regular';
+  src: url('TiemposHeadline-Regular.otf') format('opentype');
 }
 
 :root {
@@ -256,7 +269,7 @@
 }
 
 .entries__index-entry-footer-left span {
-  font-style: italic;
+  font-family: TiemposHeadline-MediumItalic;
   font-size: 35px;
 }
 
@@ -415,6 +428,11 @@ body.entries__show-low-energy-unpleasant .entries__show-emotion-label  {
   margin: 0;
 }
 
+.entries__show-entry-text-container :last-child {
+  margin: 0;
+  font-family: TiemposHeadline-Light;
+}
+
 .entries__show-comments-container {
   background-color: rgba(126, 132, 128, 0.2);
   border-radius: 10px;
@@ -466,6 +484,11 @@ body.entries__show-low-energy-unpleasant .entries__show-emotion-label  {
   transform: translateX(-300px) translateY(250px);
   top: -50px;
 }
+
+
+//entries new styles
+
+
 
 //-------------------- old styles
 

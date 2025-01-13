@@ -1,49 +1,101 @@
-<h1><%= @entry.text.truncate(50) %></h1>
+<section class=" entries__show-content-container">
+  <div class="entries__show-emotion-symbol">
+    placeholder
+  </div>
 
-<p>
-  <strong>Emotion:</strong>
-  <%= @entry.emotion %>
-</p>
+  <div class="entries__show-emotion-header">
+    <p>I'm feeling</p>
+    <p class="entries__show-emotion-label"><%= @entry.emotion %></p>
+  </div>
 
-<p>
-  <strong>Location:</strong>
-  <%= @entry.location %>
-</p>
+  <div class="entries__show-info-container">
+    <div class="entries__show-date-container">
+      <p><%= @entry.created_at.strftime("%a %b %-d %l:%M %p") %></p>
+    </div>
 
-<p>
-  <strong>People Involved:</strong>
-  <%= @entry.people %>
-</p>
+    <div class="entries__show-tags-container">
+      <p>tag1</p>
+      <p>tag2</p>
+      <p>tag3</p>
+    </div>
+  </div>
 
-<p>
-  <strong>Activity:</strong>
-  <%= @entry.activity %>
-</p>
+  <div class="entries__show-entry-text-container">
+    <p>Entry</p>
+    <p><%= @entry.text %></p>
+  </div>
 
-<p>
-  <strong>Energy Level:</strong>
-  <%= @entry.energy_level %>/10
-</p>
+  <div class="entries__show-options-container">
+    <button>Private</button>
+    <%= link_to 'Edit', edit_entry_path(@entry), class: 'btn' %>
+    <%= link_to 'Delete', entry_path(@entry), class:'btn', data: {turbo_method: :delete} %>
+  </div>
 
-<p>
-  <strong>Created At:</strong>
-  <%= @entry.created_at.strftime("%B %d, %Y %H:%M") %>
-</p>
+  <div class="entries__show-comments-container">
+    <p>Comments</p>
+    <% @entry.comments.each do |comment| %>
+      <div class="entries__show-comment-container">
+        <p><%= comment.user.email %></p>
+        <p><%= comment.text %></p>
+      </div>
+    <% end %>
+  </div>
 
-<%= link_to 'Edit', edit_entry_path(@entry) %> |<%= link_to 'Back to Entries', entries_path %>
 
-<h4> Comments: </h4>
-<% @entry.comments.each do |comment| %>
-  <div>
-  <strong><%= comment.user.email %>: </strong>
-  <%= comment.text %>
-  <%= link_to 'View', entry_comment_path(@entry, comment) %> |
-  <% if comment.user == current_user %>
-   <%= link_to 'Edit', edit_entry_comment_path(entry, comment) %> |
-   <%= link_to 'Delete', entry_comment_path(entry, comment), metod: :delete, data: {confirm: 'Are you sure?'} %>
-   <% end %>
-   </div> 
+  <div class="entries__show-blob">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="200%" id="blobSvg">
+      <defs>
+        <linearGradient id="fill" x1="0%" y1="0%" x2="100%" y2="0%" gradientTransform="rotate(245 0.5 0.5)">
+          <stop offset="0%" stop-color="
+               rgba(234, 255, 214, 0.02)
+"></stop>
 
-   <%end%>
+        </linearGradient>
+      </defs>
+      <path fill="url(#fill)">
+        <animate attributeName="d" dur="10s" repeatCount="indefinite"
+                 values="
+                     M80.5,60.5Q67,71,56,72Q45,73,36,67Q27,61,26.5,49.5Q26,38,34,26.5Q42,15,57.5,18Q73,21,83.5,35.5Q94,50,80.5,60.5Z;
 
-   <%= link_to 'Add a comment', new_entry_comment_path(@entry) if current_user.friend_of?(@entry.user) %>
+                     M81.5,60Q66,70,53.5,80Q41,90,24.5,80Q8,70,12.5,52Q17,34,28.5,20.5Q40,7,52.5,19.5Q65,32,81,41Q97,50,81.5,60Z;
+
+                     M83.5,64Q72,78,58.5,75Q45,72,31,69Q17,66,16,49.5Q15,33,28.5,25Q42,17,53.5,24.5Q65,32,80,41Q95,50,83.5,64Z;
+
+                     M74.5,58Q63,66,54,69Q45,72,26,71.5Q7,71,18.5,55.5Q30,40,37.5,33.5Q45,27,63,19Q81,11,83.5,30.5Q86,50,74.5,58Z;
+
+                     M77,67.5Q78,85,59.5,87.5Q41,90,32,76.5Q23,63,26.5,51.5Q30,40,35,22Q40,4,59,9.5Q78,15,77,32.5Q76,50,77,67.5Z;
+
+                     M80.5,60.5Q67,71,56,72Q45,73,36,67Q27,61,26.5,49.5Q26,38,34,26.5Q42,15,57.5,18Q73,21,83.5,35.5Q94,50,80.5,60.5Z
+                  "/>
+      </path>
+    </svg>
+  </div>
+  <div class="entries__show-blob-2">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="180%" id="blobSvg">
+      <defs>
+        <linearGradient id="fill" x1="0%" y1="0%" x2="100%" y2="0%" gradientTransform="rotate(245 0.5 0.5)">
+          <stop offset="0%" stop-color="
+               rgba(234, 255, 214, 0.02)
+"></stop>
+
+        </linearGradient>
+      </defs>
+      <path fill="url(#fill)">
+        <animate attributeName="d" dur="10s" repeatCount="indefinite"
+                 values="
+                     M80.5,60.5Q67,71,56,72Q45,73,36,67Q27,61,26.5,49.5Q26,38,34,26.5Q42,15,57.5,18Q73,21,83.5,35.5Q94,50,80.5,60.5Z;
+
+                     M81.5,60Q66,70,53.5,80Q41,90,24.5,80Q8,70,12.5,52Q17,34,28.5,20.5Q40,7,52.5,19.5Q65,32,81,41Q97,50,81.5,60Z;
+
+                     M83.5,64Q72,78,58.5,75Q45,72,31,69Q17,66,16,49.5Q15,33,28.5,25Q42,17,53.5,24.5Q65,32,80,41Q95,50,83.5,64Z;
+
+                     M74.5,58Q63,66,54,69Q45,72,26,71.5Q7,71,18.5,55.5Q30,40,37.5,33.5Q45,27,63,19Q81,11,83.5,30.5Q86,50,74.5,58Z;
+
+                     M77,67.5Q78,85,59.5,87.5Q41,90,32,76.5Q23,63,26.5,51.5Q30,40,35,22Q40,4,59,9.5Q78,15,77,32.5Q76,50,77,67.5Z;
+
+                     M80.5,60.5Q67,71,56,72Q45,73,36,67Q27,61,26.5,49.5Q26,38,34,26.5Q42,15,57.5,18Q73,21,83.5,35.5Q94,50,80.5,60.5Z
+                  "/>
+      </path>
+    </svg>
+  </div>
+</section>

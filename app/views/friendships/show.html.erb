@@ -1,0 +1,17 @@
+
+<h1> My Friends </h1>
+
+ <% if @friends.present? && @friends.any? %>
+   <ul>
+   <% @friends.each do |friendship| %>
+      <li><%= friendship.friend.username %> (<%= friendship.friend.email %>)
+      <span> <% if current_user.friendships.exists?(friend_id: friendship.friend.id) %>
+      <%= button_to "Remove", remove_friend_friendships_path(email: friendship.friend.email, username: friendship.friend.username), method: :delete, class: "btn btn-danger" %> 
+      <% end %>
+      </span>
+      </li>
+   <% end %>
+   </ul>
+    <% else %>
+    <p> You have no friends added yet. </p>
+    <% end %>

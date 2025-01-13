@@ -12,7 +12,7 @@
 
   </head>
 
-  <body>
+  <body class="<%= controller.controller_name %> <%= controller.action_name %> <%= 'entries__show-' + mood_group(@entry.emotion) if defined?(@entry) %>">
     <%= render 'layouts/navigation' %>
     <%= yield %>
     <p class="notice"><%= notice %></p>

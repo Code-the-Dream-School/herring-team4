@@ -1,15 +1,5 @@
-<%= form_with url: add_friend_friendships_path, method: :post do |f| %>
-  <%= f.label :email, "Add Friend by Email" %>
-  <%= f.text_field :email %>
-  <%= f.submit "Add Friend" %>
-<% end %>
-
-<% @friends.each do |friend| %>
-  <p>
-    <%= friend.user.email %>
-    <%= button_to "Remove Friend", remove_friend_friendships_path(email: friend.user.email), method: :delete %>
-  </p>
-<% end %>
+<%= link_to "My friends", friendship_path(:id) %>
+<h1> Search for friends: </h1>
 
 <%= form_with url: search_friendships_path, method: :get, local: true do |f| %>
   <%= f.label :query, "Search for friends" %>
@@ -22,8 +12,10 @@
     <% @users.each do |user| %>
      <li> 
       <%= user.username %> (<%= user.email %>)
-      <% unless current_user.friendships.exists?(friend_id: user.id ) %>
-         <%= link_to "Add Friend", add_friend_friendships_path(email: user.email), method: :post %>
+      <% if current_user.friendships.exists?(friend_id: user.id) %>
+      <%= button_to "Remove", remove_friend_friendships_path(email: user.email, username: user.username), method: :delete, class: "btn btn-danger" %>
+      <% else %>
+         <%= button_to "Add Friend", add_friend_friendships_path(email: user.email, username: user.username), method: :post, class: "btn btn-primary" %>
         <% end %>
      </li>
      <% end %>

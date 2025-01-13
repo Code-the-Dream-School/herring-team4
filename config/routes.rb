@@ -19,9 +19,12 @@ Rails.application.routes.draw do
   get 'profile', to: 'users#show', as: 'profile'
 
 
-  resources :friendships, only: [:index] do
-    post :add_friend, on: :collection
-    delete :remove_friend, on: :collection
+  resources :friendships, only: [:index, :show] do
+    collection do 
+    post :add_friend
+    delete :remove_friend
+    get :search
+    end
   end
 
 

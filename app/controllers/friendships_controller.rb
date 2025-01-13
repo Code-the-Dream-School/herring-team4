@@ -4,6 +4,21 @@ class FriendshipsController < ApplicationController
 
   def index
     @friends = current_user.friendships
+    @users = []
+  end
+
+  def show
+    @friends = current_user.friendships
+  end
+
+  def search
+    @query = params[:query]
+    if @query.present?
+     @users = User.search_by_username_or_email(@query) 
+    else
+      @users
+    end
+    render :index
   end
 
   def add_friend
@@ -27,7 +42,7 @@ class FriendshipsController < ApplicationController
   private
 
   def set_friend
-    @friend = User.find_by(email: params[:email])
+    @friend = User.find_by("email = ? OR username = ?", params[:email], params[:username])
     if @friend.nil?
       flash[:alert] = "User not found"
       redirect_to friendships_path

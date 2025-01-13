@@ -17,7 +17,12 @@
 
   <div>
     <%= form.label :emotion %>
-    <%= form.select :emotion, options_for_select(['Happy', 'Sad', 'Excited', 'Angry', 'Anxious', 'Other'], entry.emotion), { prompt: 'Select Emotion' } %>
+    <%= form.select :emotion, options_for_select(
+      ['Connected', 'Calm', 'Good', 'Thoughtful', 'Relaxed',
+       'Sad', 'Bored', 'Tired', 'Meh', 'Disapointed',
+       'Excited', 'Pleased', 'Happy', 'Cheerful', 'Upbeat',
+       'Angry', 'Anxious', 'Peeved', 'Tense', 'Irate'
+      ], entry.emotion), { prompt: 'Select Emotion' } %>
   </div>
 
   <div>

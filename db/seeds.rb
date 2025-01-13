@@ -53,7 +53,7 @@ users.each do |user|
       people: Faker::Name.name,
       activity: Faker::Hobby.activity,
       energy_level: rand(1..10),
-      )
+    )
   end
 end
 
@@ -65,4 +65,19 @@ other_users_entries.each do |entry|
     user_id: first_user.id,
     emote: "love"
   )
+end
+
+# other users add 1 comment to each post of admin
+first_user_entries = first_user.entries
+
+first_user_entries.each do |entry|
+
+  users.each do |user|
+    Comment.create!(
+      entry_id: entry.id,
+      user_id: user.id,
+      text: 'this is a random comment'
+    )
+  end
+
 end

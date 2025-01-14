@@ -2,9 +2,16 @@
 <h1> My Friends </h1>
 
  <% if @friends.present? && @friends.any? %>
-   <ul>
+   <ul class= "friend-list">
    <% @friends.each do |friendship| %>
-      <li><%= friendship.friend.username %> (<%= friendship.friend.email %>)
+      <li class= "a-friend">
+      <br>
+    <% if friendship.friend.profile_picture.attached? %>
+        <%= image_tag url_for(friendship.friend.profile_picture), width: 50, height: 50, 
+        alt:"#{friendship.friend.username}",
+        class: "friend-profile-picture"  %>
+        <% end %>
+      <%= friendship.friend.username %> (<%= friendship.friend.email %>)
       <span> <% if current_user.friendships.exists?(friend_id: friendship.friend.id) %>
       <%= button_to "Remove", remove_friend_friendships_path(email: friendship.friend.email, username: friendship.friend.username), method: :delete, class: "btn btn-danger" %> 
       <% end %>

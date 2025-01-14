@@ -8,9 +8,14 @@
   <%end %> 
 
   <% if @users&.any? %>
-   <ul>
+   <ul class= "friend-list">
     <% @users.each do |user| %>
      <li> 
+      <% if user.profile_picture.attached? %>
+        <%= image_tag url_for(user.profile_picture), width: 50, height: 50, 
+        alt:"#{user.username}",
+        class: "friend-profile-picture"  %>
+        <% end %>
       <%= user.username %> (<%= user.email %>)
       <% if current_user.friendships.exists?(friend_id: user.id) %>
       <%= button_to "Remove", remove_friend_friendships_path(email: user.email, username: user.username), method: :delete, class: "btn btn-danger" %>

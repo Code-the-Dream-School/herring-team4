@@ -14,6 +14,26 @@
 
 
     <h2>Who are you with?</h2>
+
+
+    <%= form_with(model: @entry, local:true) do |f| %>
+
+      <% tag_options = {
+        "company" => %w[Friends Family Pets Strangers Myself Colleagues],
+        "location" => %W[Cooking Eating "Working out" Cleaning Journaling Meditating Working Dancing Working Water Aerobics],
+        "activity" => %w[Home Library School Work Park Outside Gym Restaurant Club]
+      } %>
+
+      <% tag_options["company"].each do |option|%>
+        <%= f.radio_button :company, option, id: "company_#{option}" %>
+        <%= f.label :company, option,  for: "company_#{option}", class: 'radio-label' %>
+      <% end %>
+
+
+    <% end %>
+
+
+
     <div class="entries__new-company-tags-container">
       <p>Friends</p>
       <p>Family</p>

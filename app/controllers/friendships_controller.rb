@@ -24,7 +24,7 @@ class FriendshipsController < ApplicationController
 
   def add_friend
     if current_user.add_friend(@friend)
-      flash[:notice] = "#{@friend.email} has been added as a friend!"
+      flash[:notice] = "#{@friend.username} has been added as a friend!"
     else
       flash[:alert] = "Unable to add friend."
     end
@@ -33,7 +33,7 @@ class FriendshipsController < ApplicationController
 
   def remove_friend
     if current_user.remove_friend(@friend)
-      flash[:notice] = "#{@friend.email} has been removed from your friends"
+      flash[:notice] = "#{@friend.username} has been removed from your friends"
     else
       flash[:alert] = "Unable to remove friend"
     end

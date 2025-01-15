@@ -36,8 +36,9 @@ class User < ApplicationRecord
   end
 
   def remove_friend(other_user)
-    friendships.find_by(friend: other_user).destroy
-    other_user.friendships.find_by(friend: self).destroy
+    friendships.find_by(friend: other_user)&.destroy
+    other_user.friendships.find_by(friend: self)&.destroy
+    true
   end
 
   def friend_of?(other_user)

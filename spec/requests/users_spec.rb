@@ -29,9 +29,10 @@ RSpec.describe "Users", type: :request do
     context "with valid parameters" do
       it "updates the user's bio and profile picture" do
         sign_in user
-        patch user_registration_path, params: { user: valid_attributes }
+        valid_bio = valid_attributes[:bio]
+        patch update_bio_user_path(user), params: { user: { bio: valid_bio } }
         user.reload
-        expect(user.bio).to eq(valid_attributes[:bio])
+        expect(user.bio).to eq(valid_bio)
         expect(user.profile_picture).to be_attached
       end
     end

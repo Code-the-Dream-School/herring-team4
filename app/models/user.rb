@@ -51,7 +51,7 @@ class User < ApplicationRecord
                       .pluck("DATE(created_at)")
 
     entry_dates.each do | entry_date |
-      if Date.parse(entry_date) === current_date
+      if entry_date === current_date
         streak += 1
         current_date -= 1
       else

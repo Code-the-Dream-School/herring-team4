@@ -13,12 +13,19 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:11-alpine
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
     env:
-      DB_CONNECTION: sqlite3
-      DB_DATABASE: test.sqlite3
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
     steps:
-      - name: Create Database
-        run: touch test.sqlite3
       - name: Checkout code
         uses: actions/checkout@v4
       # Add or replace dependency steps here

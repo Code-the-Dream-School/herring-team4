@@ -16,7 +16,7 @@
         alt:"#{user.username}",
         class: "friend-profile-picture"  %>
         <% end %>
-      <%= user.username %> (<%= user.email %>)
+      <%= user.username %> 
       <% if current_user.friendships.exists?(friend_id: user.id) %>
       <%= button_to "Remove", remove_friend_friendships_path(email: user.email, username: user.username), method: :delete, class: "btn btn-danger" %>
       <% else %>

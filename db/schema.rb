@@ -62,6 +62,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_07_013021) do
     t.integer "energy_level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_public"
     t.index ["user_id"], name: "index_entries_on_user_id"
   end
 

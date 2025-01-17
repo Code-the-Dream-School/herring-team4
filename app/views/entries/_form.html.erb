@@ -41,6 +41,11 @@
   </div>
 
   <div>
+    <%= form.label :is_public, "Make this entry public?" %>
+    <%= form.check_box :is_public %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

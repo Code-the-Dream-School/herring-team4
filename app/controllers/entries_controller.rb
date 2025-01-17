@@ -40,8 +40,8 @@ class EntriesController < ApplicationController
   end
 
   def friends_entries
-    @entries = Entry.where(user:current_user.friends.entries)
-    @entries = Entry.includes(:comments).where(user: current_user.friends)
+    @entries = Entry.public_entries.where(user:current_user.friends.entries)
+    @entries = Entry.public_entries.includes(:comments).where(user: current_user.friends)
     @comment = Comment.new
   end
 
@@ -55,6 +55,6 @@ class EntriesController < ApplicationController
   end
 
   def entry_params
-    params.require(:entry).permit(:text, :emotion, :location, :people, :activity, :energy_level)
+    params.require(:entry).permit(:text, :emotion, :location, :people, :activity, :energy_level, :is_public)
   end
 end

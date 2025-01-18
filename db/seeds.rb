@@ -44,12 +44,6 @@ users.each do |user|
     filename: "#{user.username}.jpg",
     content_type: 'image/png'
   )
-
-  # user.profile_picture.attach(
-  #   io: File.open(default_image_path),
-  #   filename: 'default.png',
-  #   content_type: 'image/png'
-  # )
 end
 
 # make all users friends with user 1

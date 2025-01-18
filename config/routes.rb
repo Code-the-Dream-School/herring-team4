@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   get "friend/entries" => "entries#friends_entries"
 
+  get "friend/entry/:id" => "entries#friend_entry_show", as: :friend_entry_show
+
   resources :reactions, only: [:create]
 
   resources :entries do

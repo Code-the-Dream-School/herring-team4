@@ -1,0 +1,100 @@
+<section class=" entries__show-content-container">
+  <div class="entries__show-emotion-symbol">
+    <%= image_tag(@entry.user.profile_picture) %>
+  </div>
+
+  <div class="entries__show-emotion-header">
+    <p><%= @entry.user.username %> is feeling</p>
+    <p class="entries__show-emotion-label"><%= @entry.emotion %></p>
+  </div>
+
+  <div class="entries__show-info-container">
+    <div class="entries__show-date-container">
+      <p><%= @entry.created_at.strftime("%a %b %-d %l:%M %p") %></p>
+    </div>
+
+    <div class="entries__show-tags-container">
+      <% all_tags = JSON.parse(@entry.company) + JSON.parse(@entry.activity) + JSON.parse(@entry.location)%>
+      <% all_tags.each do |tag| %>
+        <% unless tag == "0" %>
+          <p><%=tag %></p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="entries__show-entry-text-container">
+    <p>Entry</p>
+    <p><%= @entry.text %></p>
+  </div>
+
+  <div class="entries__show-comments-container">
+    <p>Comments</p>
+    <%= link_to 'Comment', new_entry_comment_path(@entry), class: "btn btn-primary" %>
+    <% @entry.comments.each do |comment| %>
+      <div class="entries__show-comment-container">
+
+        <%= image_tag(comment.user.profile_picture) %>
+        <p><%= comment.user.email %></p>
+        <p><%= comment.text %></p>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="entries__show-blob">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="200%" id="blobSvg">
+      <defs>
+        <linearGradient id="fill" x1="0%" y1="0%" x2="100%" y2="0%" gradientTransform="rotate(245 0.5 0.5)">
+          <stop offset="0%" stop-color="
+               rgba(234, 255, 214, 0.02)
+"></stop>
+
+        </linearGradient>
+      </defs>
+      <path fill="url(#fill)">
+        <animate attributeName="d" dur="10s" repeatCount="indefinite"
+                 values="
+                     M80.5,60.5Q67,71,56,72Q45,73,36,67Q27,61,26.5,49.5Q26,38,34,26.5Q42,15,57.5,18Q73,21,83.5,35.5Q94,50,80.5,60.5Z;
+
+                     M81.5,60Q66,70,53.5,80Q41,90,24.5,80Q8,70,12.5,52Q17,34,28.5,20.5Q40,7,52.5,19.5Q65,32,81,41Q97,50,81.5,60Z;
+
+                     M83.5,64Q72,78,58.5,75Q45,72,31,69Q17,66,16,49.5Q15,33,28.5,25Q42,17,53.5,24.5Q65,32,80,41Q95,50,83.5,64Z;
+
+                     M74.5,58Q63,66,54,69Q45,72,26,71.5Q7,71,18.5,55.5Q30,40,37.5,33.5Q45,27,63,19Q81,11,83.5,30.5Q86,50,74.5,58Z;
+
+                     M77,67.5Q78,85,59.5,87.5Q41,90,32,76.5Q23,63,26.5,51.5Q30,40,35,22Q40,4,59,9.5Q78,15,77,32.5Q76,50,77,67.5Z;
+
+                     M80.5,60.5Q67,71,56,72Q45,73,36,67Q27,61,26.5,49.5Q26,38,34,26.5Q42,15,57.5,18Q73,21,83.5,35.5Q94,50,80.5,60.5Z
+                  "/>
+      </path>
+    </svg>
+  </div>
+  <div class="entries__show-blob-2">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="180%" id="blobSvg">
+      <defs>
+        <linearGradient id="fill" x1="0%" y1="0%" x2="100%" y2="0%" gradientTransform="rotate(245 0.5 0.5)">
+          <stop offset="0%" stop-color="
+               rgba(234, 255, 214, 0.02)
+"></stop>
+
+        </linearGradient>
+      </defs>
+      <path fill="url(#fill)">
+        <animate attributeName="d" dur="10s" repeatCount="indefinite"
+                 values="
+                     M80.5,60.5Q67,71,56,72Q45,73,36,67Q27,61,26.5,49.5Q26,38,34,26.5Q42,15,57.5,18Q73,21,83.5,35.5Q94,50,80.5,60.5Z;
+
+                     M81.5,60Q66,70,53.5,80Q41,90,24.5,80Q8,70,12.5,52Q17,34,28.5,20.5Q40,7,52.5,19.5Q65,32,81,41Q97,50,81.5,60Z;
+
+                     M83.5,64Q72,78,58.5,75Q45,72,31,69Q17,66,16,49.5Q15,33,28.5,25Q42,17,53.5,24.5Q65,32,80,41Q95,50,83.5,64Z;
+
+                     M74.5,58Q63,66,54,69Q45,72,26,71.5Q7,71,18.5,55.5Q30,40,37.5,33.5Q45,27,63,19Q81,11,83.5,30.5Q86,50,74.5,58Z;
+
+                     M77,67.5Q78,85,59.5,87.5Q41,90,32,76.5Q23,63,26.5,51.5Q30,40,35,22Q40,4,59,9.5Q78,15,77,32.5Q76,50,77,67.5Z;
+
+                     M80.5,60.5Q67,71,56,72Q45,73,36,67Q27,61,26.5,49.5Q26,38,34,26.5Q42,15,57.5,18Q73,21,83.5,35.5Q94,50,80.5,60.5Z
+                  "/>
+      </path>
+    </svg>
+  </div>
+</section>

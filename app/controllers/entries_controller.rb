@@ -45,6 +45,11 @@ class EntriesController < ApplicationController
     @comment = Comment.new
   end
 
+  def friend_entry_show
+    @entry = Entry.find_by(id: params[:id])
+
+  end
+
   private
 
   def set_entry

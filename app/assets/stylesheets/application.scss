@@ -250,6 +250,7 @@
 .entries__index-entry-header-left {
   display: flex;
   flex-direction: column;
+  width: 70%;
 }
 
 .entries__index-entry-header-left-tags-container {
@@ -286,6 +287,18 @@
   font-family: TiemposHeadline-MediumItalic;
   font-size: 35px;
 }
+
+.entries__index-entry-header-right {
+  width: 100px;
+}
+
+.entries__index-entry-header-right img {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 
 //entries show styles ------------------------------
 
@@ -459,6 +472,7 @@ body.entries__show-low-energy-unpleasant .entries__show-emotion-label  {
   display: flex;
   flex-direction: column;
   padding: 10px;
+  z-index: 99;
   gap: 10px
 }
 
@@ -663,6 +677,7 @@ input[type="checkbox"]:checked + .entries__new-tag-label {
 .entries__edit-header p {
   margin: 0;
 }
+
 
 
 

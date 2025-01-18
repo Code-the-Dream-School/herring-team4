@@ -35,11 +35,22 @@ end
 
 # add a default pic to each user
 users.each do |user|
+
+  avatar_url = Faker::Avatar.image(slug: user.username, size: "300x300")
+  file = URI.open(avatar_url)
+
+
   user.profile_picture.attach(
-    io: File.open(default_image_path),
-    filename: 'default.png',
+    io: file,
+    filename: "#{user.username}.png",
     content_type: 'image/png'
   )
+
+  # user.profile_picture.attach(
+  #   io: File.open(default_image_path),
+  #   filename: 'default.png',
+  #   content_type: 'image/png'
+  # )
 end
 
 # make all users friends with user 1

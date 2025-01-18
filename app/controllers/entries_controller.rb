@@ -40,9 +40,16 @@ class EntriesController < ApplicationController
   end
 
   def friends_entries
-    @entries = Entry.public_entries.where(user:current_user.friends.entries)
-    @entries = Entry.public_entries.includes(:comments).where(user: current_user.friends)
+
+    @entries = Entry.where(user:current_user.friends.entries)
+    @entries = Entry.includes(:comments).where(user: current_user.friends)
     @comment = Comment.new
+
+
+    #new entry handling with private functionality
+    # @entries = Entry.public_entries.where(user:current_user.friends.entries)
+    # @entries = Entry.public_entries.includes(:comments).where(user: current_user.friends)
+    # @comment = Comment.new
   end
 
   private
@@ -55,6 +62,6 @@ class EntriesController < ApplicationController
   end
 
   def entry_params
-    params.require(:entry).permit(:text, :emotion, :location, :people, :activity, :energy_level, :is_public)
+    params.require(:entry).permit(:text, :emotion, :energy_level, :private, :is_public, company: [], activity: [],  location: [])
   end
 end

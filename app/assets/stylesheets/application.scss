@@ -397,6 +397,7 @@ body.entries__show-low-energy-unpleasant .entries__show-emotion-label  {
   background-color: rgba(126, 132, 128, 0.2);
 
   padding: 15px;
+  align-items: end;
   border-radius: 10px;
   max-width: 600px;
   width: 100%;
@@ -551,9 +552,9 @@ body.entries__show-low-energy-unpleasant .entries__show-emotion-label  {
 }
 
 .entries__new-private-public-container input[type="checkbox"] {
-  width: 20px; /* Adjust the width */
-  height: 20px; /* Adjust the height */
-  cursor: pointer; /* Adds a pointer cursor for better UX */
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
   font-size: 400px;
 }
 

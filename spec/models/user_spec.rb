@@ -40,7 +40,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "streak calculation" do
-    let(:user) { create(:user) }
+    let!(:user) { create(:user) }
 
     it "returns 0 when the user has no entries" do
       expect(user.calculate_streak).to eq(0)

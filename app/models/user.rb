@@ -28,7 +28,7 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   validates :bio, length: { maximum: 500 }
 
-  after_commit :add_default_profile_picture, on: %i[create]
+  # after_commit :add_default_profile_picture, on: %i[create]
 
   def add_friend(other_user)
     friendships.create(friend: other_user)
@@ -57,7 +57,7 @@ class User < ApplicationRecord
                       .pluck("DATE(created_at)")
 
     entry_dates.each do | entry_date |
-      if Date.parse(entry_date) === current_date
+      if entry_date === current_date
         streak += 1
         current_date -= 1
       else

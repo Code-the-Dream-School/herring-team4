@@ -6,7 +6,7 @@
     <%= link_to 'Settings', '#', class: 'navbar-btn' %>
 
 
-    <% if current_user.notification %>
+    <% if current_user.notification&.persisted? %>
       <%= link_to 'Schedule', notification_path(current_user.notification), class: 'navbar-btn' %>
     <% else %>
 

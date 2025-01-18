@@ -1,17 +1,20 @@
 <h1> Comments for <%= @entry.text %> </h1> 
-# possible change?
-
 
 <% @comments.each do |comment| %>
   <div> 
-  <p> <%= comment.user.email %> : </p> 
+  <p> <%= comment.user.username %> : </p> 
     <p>
     <%= comment.text %>
+     <% if comment.user == current_user %>
+           <%= button_to entry_comment_path(@entry, comment), method: :delete, class: "btn btn-danger btn-sm" do%>
+           <i class="bi bi-trash"></i>
+        <% end %>
+        <% end %>
    </p> 
    </div>
 
    <% end %>
 
    <div>
-   <%= link_to 'Back to entry', @entry %>
+   <%= link_to 'Friends Entries', friend_entries_path, class: "btn btn-primary" %>
    </div>

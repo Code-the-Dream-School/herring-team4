@@ -10,7 +10,11 @@
 <div class="entries-container">
   <% @entries.each do |entry| %>
     <div class="entry-card">
-      <h3><strong>User:</strong> <%= entry.user.email %></h3>
+      <h3><% if entry.user.profile_picture.attached? %>
+        <%= image_tag url_for(entry.user.profile_picture), width: 50, height: 50, 
+        alt:"#{entry.user.username}",
+        class: "friend-profile-picture"  %>
+        <% end %> <%= entry.user.username %></h3>
       <p><strong>Entry:</strong> <%= entry.text.truncate(50) %></p>
 
       <div class="entry-actions">
@@ -26,16 +30,29 @@
           <p><strong><%= reaction.user.email %>:</strong> <%= reaction.emote %></p>
         <% end %>
       </div>
+
+       <%= link_to 'Comment', new_entry_comment_path(entry), class: "btn btn-primary btn-sm" %>
+
+      <div class="entry-comments" >
+       <% entry.comments.each do |comment| %>
+        <p>
+         <strong><%= comment.user.username %>: </strong>
+          <%= comment.text %> 
+          <span>
+          <% if comment.user == current_user %>
+           <%= link_to entry_comment_path(entry, comment), class: "btn btn-primary btn-sm" do %>
+            <i class="bi bi-eye"></i> 
+          <% end %>
+          </span>
+          <span>
+           <%= button_to entry_comment_path(entry, comment), method: :delete, class: "btn btn-danger btn-sm" do%>
+             <i class="bi bi-trash"></i> 
+           </span><% end %>
+        </p>
+        <% end %>
+        <% end %>
+       </div>
+      
     </div>
-
-    <% entry.comments.each do |comment| %>
-      <p>
-        <strong><%= comment.user.email %>: </strong>
-        <%= comment.text %>
-      </p>
-
     <%end%>
-    <%= link_to 'Comment', new_entry_comment_path(entry), class: "btn btn-primary" %>
-
-  <% end %>
 </div>

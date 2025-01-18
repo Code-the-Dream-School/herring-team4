@@ -18,11 +18,16 @@ RSpec.describe "comments/show.html.erb", type: :view do
     end
 
     it "renders the partial for the comment" do
+      expect(rendered).to include(comment.user.username)
       expect(rendered).to include(comment.text)
     end
 
     it "displays the edit link" do
       expect(rendered).to have_link("Edit", href: edit_entry_comment_path(entry, comment))
+    end
+
+    it "renders the delete button" do
+      expect(rendered).to have_selector("button.btn.btn-danger.btn-sm")
     end
 
     it "displays the back to entry link" do

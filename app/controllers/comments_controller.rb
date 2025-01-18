@@ -4,7 +4,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
 before_action :authenticate_user!
 before_action :set_entry
 before_action :set_comment, only: [:show, :edit, :update, :destroy]
-before_action :authorize_friend!
+before_action :authorize_friend!, only: [:create, :new]
 
   def index
     @comments = current_user.comments
@@ -43,9 +43,9 @@ before_action :authorize_friend!
   def destroy
     if @comment.user == current_user || current_user.friend_of?(@entry.user)
       @comment.destroy
-      redirect_to @entry, notice: 'Comment was successfully deleted.'
+      redirect_to friend_entries_path, notice: 'Comment was successfully deleted.'
     else
-      redirect_to @entry, alert: 'You are not authorized to delete comment.'
+      redirect_to friend_entries_path, alert: 'You are not authorized to delete comment.'
     end
   end
 

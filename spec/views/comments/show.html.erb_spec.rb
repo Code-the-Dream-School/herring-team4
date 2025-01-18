@@ -18,6 +18,7 @@ RSpec.describe "comments/show.html.erb", type: :view do
     end
 
     it "renders the partial for the comment" do
+      expect(rendered).to include(comment.user.username)
       expect(rendered).to include(comment.text)
     end
 

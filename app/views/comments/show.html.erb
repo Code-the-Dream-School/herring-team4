@@ -8,5 +8,8 @@
 
 <% end %>
   <%= link_to 'Edit', edit_entry_comment_path(@entry, @comment), class: "btn btn-primary" %> |
+  <%= button_to entry_comment_path(@entry, @comment), method: :delete, class: "btn btn-danger btn-sm" do%>
+    <i class="bi bi-trash"></i>
+  <% end %>
   <%= link_to 'My Entries', entries_path, class: "btn btn-primary" %>
   <%= link_to 'Friends Entries', friend_entries_path, class: "btn btn-primary" %>

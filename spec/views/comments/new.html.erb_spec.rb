@@ -18,7 +18,7 @@ RSpec.describe "comments/new.html.erb", type: :view do
     end
 
     it "renders a link back to comments index" do
-      expect(rendered).to have_link("Back to comments", href: comments_index_path)
+      expect(rendered).to have_link("Friends Entries", href: friend_entries_path)
     end
   end
 end

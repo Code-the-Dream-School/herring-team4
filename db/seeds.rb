@@ -11,6 +11,10 @@
 User.destroy_all
 
 users = []
+predefined_emotions = %w[Connected Calm Good Thoughtful Relaxed Sad Bored Tired Meh Disappointed Excited Pleased Happy Cheerful Upbeat Angry Anxious Peeved Tense Irate]
+predefined_locations = %w[Home Library School Work Park Outside Gym Restaurant]
+predefined_activities = %w[Cooking Eating Working\ out Cleaning Journaling Meditating Working Dancing Water\ Aerobics]
+predefined_company = %w[Friends Family Pets Strangers Myself Colleagues]
 default_image_path = Rails.root.join('spec', 'fixtures', 'files', 'default.png')
 
 users << User.create!(
@@ -47,11 +51,11 @@ end
 users.each do |user|
   3.times do
     user.entries.create!(
-      text: Faker::Lorem.sentence,
-      emotion: "place holder emotion",
-      location: Faker::Address.city,
-      people: Faker::Name.name,
-      activity: Faker::Hobby.activity,
+      text: Faker::Lorem.paragraph,
+      emotion: predefined_emotions.sample,
+      location: [predefined_locations.sample].to_json,
+      company: predefined_company.sample(2).to_json,
+      activity: predefined_activities.sample(2).to_json,
       energy_level: rand(1..10),
     )
   end
@@ -69,9 +73,7 @@ end
 
 # other users add 1 comment to each post of admin
 first_user_entries = first_user.entries
-
 first_user_entries.each do |entry|
-
   users.each do |user|
     Comment.create!(
       entry_id: entry.id,

@@ -1,20 +1,39 @@
 <%= form_with model: @notification, local: true do |f| %>
   <div class="form-group">
     <label>Days of the Week:</label>
-    <%= f.select :days_of_week, ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], {}, { multiple: true, class: "form-control" } %>
+    <%= f.select :days_of_week,
+      [["Monday", 1], ["Tuesday", 2], ["Wednesday", 3], ["Thursday", 4], ["Friday", 5], ["Saturday", 6], ["Sunday", 7]],
+      {},
+      { multiple: true, class: "form-control"} %>
   </div>
-
+  
   <div class="form-group">
     <label>Time:</label>
     <div class="d-flex">
-      <!-- Hour Dropdown -->
       <%= f.select :hour, (1..12).to_a, { prompt: "Hour" }, class: "form-control" %>
-      <!-- Minute Dropdown -->
       <%= f.select :minute, [0, 15, 30, 45].map { |m| [m.to_s.rjust(2, '0'), m] }, { prompt: "Minute" }, class: "form-control" %>
-      <!-- AM/PM Dropdown -->
       <%= f.select :ampm, ["AM", "PM"], { prompt: "AM/PM" }, class: "form-control" %>
     </div>
   </div>
+  
+  <div class="form-group">
+    <%= f.label :timezone, "Time Zone" %>
+    <%= f.select :timezone, 
+        [
+          ["Eastern Time (US & Canada)", "America/New_York"],
+          ["Central Time (US & Canada)", "America/Chicago"],
+          ["Mountain Time (US & Canada)", "America/Denver"],
+          ["Pacific Time (US & Canada)", "America/Los_Angeles"],
+          ["Alaska Time", "America/Anchorage"],
+          ["Hawaii-Aleutian Time", "America/Honolulu"],
+          ["Atlantic Time (Canada)", "America/Halifax"]
+        ], 
+        {}, 
+        { class: "form-control" } 
+    %>
+  </div>
+
+
 
   <%= f.submit "Save Schedule", class: "btn btn-primary" %>
   <%= link_to 'Back to Dashboard', root_path, class: "btn btn-secondary" %>

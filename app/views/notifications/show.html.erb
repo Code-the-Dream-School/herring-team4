@@ -4,7 +4,7 @@
       <h3>Notification Schedule</h3>
     </div>
     <div class="card-body">
-      <p><strong>Days of the Week:</strong> <%= @notification.days_of_week.join(", ").titleize %></p>
+      <p><strong>Days of the Week:</strong> <%= @days_of_week %></p>
       <p><strong>Time:</strong> <%= @notification.hour %>:<%= @notification.minute.to_s.rjust(2, '0') %> <%= @notification.ampm %></p>
 
       <div class="d-flex gap-2">

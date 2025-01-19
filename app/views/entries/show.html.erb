@@ -46,6 +46,8 @@
           </div>
 
           <div class="entries__show-comment-container-end">
+            <% if (comment.user = current_user) %>
+
               <%= link_to entry_comment_path(@entry, comment), class: "btn btn-primary btn-sm" do %>
                 <i class="bi bi-eye"></i>
               <% end %>
@@ -54,6 +56,7 @@
               <%= button_to entry_comment_path(@entry, comment), method: :delete, class: "btn btn-danger btn-sm" do %>
                 <i class="bi bi-trash"></i>
               <% end %>
+            <% end %>
           </div>
         </div>
       <% end %>

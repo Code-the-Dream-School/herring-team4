@@ -2,17 +2,17 @@
   <h2>My Friend Entries</h2>
   <% @entries.each do |entry| %>
     <section
-      class="<%= 'entries__index-' + mood_group(entry.emotion)%> entries__index-entry-container entry-click"
+      class="<%= 'entries__index-' + mood_group(entry.emotion) %> entries__index-entry-container entry-click"
       data-url="<%= friend_entry_show_path(entry) %>">
       <div class="entries__index-entry-header">
         <div class="entries__index-entry-header-left">
           <p><%= entry.created_at.strftime("%a %b %-d %l:%M %p") %></p>
 
           <div class="entries__index-entry-header-left-tags-container">
-            <% all_tags = JSON.parse(entry.company) + JSON.parse(entry.activity) + JSON.parse(entry.location)%>
+            <% all_tags = JSON.parse(entry.company) + JSON.parse(entry.activity) + JSON.parse(entry.location) %>
             <% all_tags.each do |tag| %>
               <% unless tag == "0" %>
-                <p><%=tag %></p>
+                <p><%= tag %></p>
               <% end %>
             <% end %>
           </div>

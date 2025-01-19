@@ -34,15 +34,17 @@
     <%= link_to 'Delete', entry_path(@entry), class:'btn', data: {turbo_method: :delete} %>
   </div>
 
-  <div class="entries__show-comments-container">
-    <p>Comments</p>
-    <% @entry.comments.each do |comment| %>
-      <div class="entries__show-comment-container">
-        <p><%= comment.user.email %></p>
-        <p><%= comment.text %></p>
-      </div>
-    <% end %>
-  </div>
+  <% if @comments.present? %>
+    <div class="entries__show-comments-container">
+      <p>Comments</p>
+      <% @entry.comments.each do |comment| %>
+        <div class="entries__show-comment-container">
+          <p><%= comment.user.email %></p>
+          <p><%= comment.text %></p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 
 
   <div class="entries__show-blob">

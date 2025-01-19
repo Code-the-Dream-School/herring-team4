@@ -25,8 +25,8 @@ RSpec.describe "entries/_form.html.erb", type: :view do
     expect(rendered).to have_select("entry[emotion]", options: emotions)
   end
 
-  it "includes a select field for private" do
-    expect(rendered).to have_select("entry[private]")
+  it "includes a select field for public" do
+    assert_select "input[type=checkbox][name='entry[is_public]']"
   end
 
   it "has checkboxes for company tags" do

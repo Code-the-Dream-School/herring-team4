@@ -278,6 +278,13 @@
   align-items: end;
 }
 
+.entries__index-entry-footer-right {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100px;
+}
 .entries__index-entry-footer-left p {
   margin: 0;
   font-size: 30px;
@@ -290,19 +297,31 @@
 
 .entries__index-entry-header-right {
   width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .entries__index-entry-header-right img {
   height: 70px;
   width: 70px;
-  border-radius: 50%;
+  border-radius: 10px;
   object-fit: cover;
+}
+
+.entries__index-entry-footer-right img {
+  height: 70px;
+  width: 70px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: solid 1px white;
 }
 
 
 //entries show styles ------------------------------
 
-body.entries.show, body.entries.edit {
+body.entries.show, body.entries.edit, body.entries.friend_entry_show {
   min-height: 100vh;
   overflow-x: hidden;
   background-attachment: fixed;
@@ -347,6 +366,13 @@ body.entries__show-low-energy-unpleasant .entries__show-emotion-label  {
   flex-direction: column;
   position: relative;
   gap: 10px
+}
+
+.entries__show-profile-picture {
+  height: 100px;
+  width: 100px;
+  border-radius: 10px;
+  border: solid 1px white;
 }
 
 .entries__show-emotion-symbol {
@@ -483,20 +509,53 @@ body.entries__show-low-energy-unpleasant .entries__show-emotion-label  {
   border-radius: 5px;
   border: 1px solid;
   gap: 15px;
+  width: 100%;
+  justify-content: space-between;
   padding: 5px;
 }
 
-.entries__show-comment-container :first-child {
-  width: 30%;
-  margin: 0px;
-  font-size: 12px;
+.entries__show-comment-container-start {
+  display: flex;
+  align-items: center;
+  gap: 10px
 }
 
-.entries__show-comment-container :last-child {
-  width: 70%;
-  margin: 0px;
-  font-size: 12px;
+.entries__show-comment-container img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
 }
+
+.entries__show-comment-container-text {
+  display: flex;
+  width: 100%;
+  justify-content: start;
+  align-items: center;
+}
+
+.entries__show-comment-container-end {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.entries__show-comment-container-end .btn {
+  padding: 10px;
+}
+
+.entries__show-comment-container-end :first-child {
+
+}
+
+.entries__show-comment-container :first-child {
+
+}
+
+//.entries__show-comment-container :last-child {
+//  width: 70%;
+//  margin: 0px;
+//  font-size: 12px;
+//}
 
 .entries__show-comment-container p {
   margin: 0;
@@ -798,6 +857,7 @@ h1 {
 .friend-profile-picture {
     border-radius: 50%;
     object-fit: cover;
+
 }
 
 //log in and sign up styles ------------------------------

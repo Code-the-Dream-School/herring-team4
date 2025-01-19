@@ -1,6 +1,6 @@
 <section class=" entries__show-content-container">
   <div class="entries__show-emotion-symbol">
-    <%= image_tag(@entry.user.profile_picture) %>
+    <%= image_tag(@entry.user.profile_picture, class: 'entries__show-profile-picture') %>
   </div>
 
   <div class="entries__show-emotion-header">
@@ -14,10 +14,10 @@
     </div>
 
     <div class="entries__show-tags-container">
-      <% all_tags = JSON.parse(@entry.company) + JSON.parse(@entry.activity) + JSON.parse(@entry.location)%>
+      <% all_tags = JSON.parse(@entry.company) + JSON.parse(@entry.activity) + JSON.parse(@entry.location) %>
       <% all_tags.each do |tag| %>
         <% unless tag == "0" %>
-          <p><%=tag %></p>
+          <p><%= tag %></p>
         <% end %>
       <% end %>
     </div>
@@ -33,10 +33,28 @@
     <%= link_to 'Comment', new_entry_comment_path(@entry), class: "btn btn-primary" %>
     <% @entry.comments.each do |comment| %>
       <div class="entries__show-comment-container">
+        <div class="entries__show-comment-container-start">
+          <%= image_tag(comment.user.profile_picture) %>
+          <p><%= comment.user.username %>:</p>
+        </div>
 
-        <%= image_tag(comment.user.profile_picture) %>
-        <p><%= comment.user.email %></p>
-        <p><%= comment.text %></p>
+        <div class="entries__show-comment-container-text">
+          <p><%= comment.text %></p>
+        </div>
+
+        <div class="entries__show-comment-container-end">
+          <% if comment.user = current_user %>
+
+            <%= link_to entry_comment_path(@entry, comment), class: "btn btn-primary btn-sm" do %>
+              <i class="bi bi-eye"></i>
+            <% end %>
+
+
+            <%= button_to entry_comment_path(@entry, comment), method: :delete, class: "btn btn-danger btn-sm" do %>
+              <i class="bi bi-trash"></i>
+            <% end %>
+          <% end %>
+        </div>
       </div>
     <% end %>
   </div>

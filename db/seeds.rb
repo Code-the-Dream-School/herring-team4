@@ -36,13 +36,12 @@ end
 # add a default pic to each user
 users.each do |user|
 
-  avatar_url = Faker::Avatar.image(slug: user.username, size: "300x300")
+  avatar_url = "https://loremflickr.com/500/500"
   file = URI.open(avatar_url)
-
 
   user.profile_picture.attach(
     io: file,
-    filename: "#{user.username}.png",
+    filename: "#{user.username}.jpg",
     content_type: 'image/png'
   )
 
@@ -93,5 +92,17 @@ first_user_entries.each do |entry|
       text: 'this is a random comment'
     )
   end
-
 end
+
+entries = Entry.all
+entries.each do |entry|
+  users.each do |user|
+    Comment.find_or_create_by!(
+      entry: entry,
+      user: user,
+      text: Faker::Lorem.sentence(word_count: 10)
+    )
+  end
+end
+
+

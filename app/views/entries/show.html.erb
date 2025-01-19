@@ -46,6 +46,36 @@
     </div>
   <% end %>
 
+  <div class="entries__show-comments-container">
+    <p>Comments</p>
+    <% @entry.comments.each do |comment| %>
+      <div class="entries__show-comment-container">
+        <div class="entries__show-comment-container-start">
+          <%= image_tag(comment.user.profile_picture) %>
+          <p><%= comment.user.username %>:</p>
+        </div>
+
+        <div class="entries__show-comment-container-text">
+          <p><%= comment.text %></p>
+        </div>
+
+        <div class="entries__show-comment-container-end">
+          <% if (comment.user = current_user) %>
+
+            <%= link_to entry_comment_path(@entry, comment), class: "btn btn-primary btn-sm" do %>
+              <i class="bi bi-eye"></i>
+            <% end %>
+
+
+            <%= button_to entry_comment_path(@entry, comment), method: :delete, class: "btn btn-danger btn-sm" do %>
+              <i class="bi bi-trash"></i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
 
   <div class="entries__show-blob">
     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="200%" id="blobSvg">

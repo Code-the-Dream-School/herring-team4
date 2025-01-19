@@ -40,16 +40,9 @@ class EntriesController < ApplicationController
   end
 
   def friends_entries
-
-    @entries = Entry.where(user:current_user.friends.entries)
-    @entries = Entry.includes(:comments).where(user: current_user.friends)
+    @entries = Entry.public_entries.where(user:current_user.friends.entries)
+    @entries = Entry.public_entries.includes(:comments).where(user: current_user.friends)
     @comment = Comment.new
-
-
-    #new entry handling with private functionality
-    # @entries = Entry.public_entries.where(user:current_user.friends.entries)
-    # @entries = Entry.public_entries.includes(:comments).where(user: current_user.friends)
-    # @comment = Comment.new
   end
 
   private

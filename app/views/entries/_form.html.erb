@@ -11,11 +11,14 @@
         <%= f.select :energy_level, %w[1 2 3 4 5 6 7 8 9 10] %>
       </div>
 
-      <div class="entries__new-emotion-selector-container">
-        <p>Private Entry?</p>
-        <%= f.select :private, [["Yes", true], ["No", false]] %>
-      </div>
+      <div class="entries__new-private-public-container">
+        <p>Public Entry?</p>
 
+        <div class="app__form-partial-public-checkbox">
+          <%= f.check_box :is_public %>
+        </div>
+
+      </div>
     </div>
 
     <div class="entries__new-tags-container">
@@ -28,7 +31,7 @@
       <h2>Who are you with?</h2>
       <div class="entries__new-company-tags-container">
         <% tag_options["company"].each do |option| %>
-          <%= f.check_box :company, { multiple: true, id: "company_#{option.parameterize}" }, option %>
+          <%= f.check_box :company, { multiple: true, id: "company_#{option.parameterize}" }, option%>
           <%= f.label :company, option, for: "company_#{option.parameterize}", class: 'entries__new-tag-label' %>
         <% end %>
       </div>
@@ -55,14 +58,6 @@
       <%= f.text_area :text, rows: 10, placeholder: "Write your entry here...", class: "entries__new-text-field" %>
     </div>
 
-<!--    new stuff by mariela -->
-
-    <div>
-      <%= form.label :is_public, "Make this entry public?" %>
-      <%= form.check_box :is_public %>
-    </div>
-
-<!-- -->
     <%= f.submit class: 'entries__new-submit-button' %>
 
   </section>

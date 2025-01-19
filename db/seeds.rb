@@ -56,6 +56,7 @@ users.each do |user|
       location: [predefined_locations.sample].to_json,
       company: predefined_company.sample(2).to_json,
       activity: predefined_activities.sample(2).to_json,
+      is_public: true,
       energy_level: rand(1..10),
     )
   end

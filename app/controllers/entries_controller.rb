@@ -55,6 +55,6 @@ class EntriesController < ApplicationController
   end
 
   def entry_params
-    params.require(:entry).permit(:text, :emotion, :location, :people, :activity, :energy_level, :is_public)
+    params.require(:entry).permit(:text, :emotion, :energy_level, :private, :is_public, company: [], activity: [],  location: [])
   end
 end

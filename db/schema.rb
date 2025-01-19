@@ -57,11 +57,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_17_044415) do
     t.string "text"
     t.string "emotion"
     t.string "location"
-    t.string "people"
+    t.string "company"
     t.string "activity"
     t.integer "energy_level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "private", default: false
     t.boolean "is_public"
     t.index ["user_id"], name: "index_entries_on_user_id"
   end

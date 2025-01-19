@@ -1,51 +1,64 @@
-<%= form_with(model: entry, local: true) do |form| %>
+<%= form_with(model: @entry, local: true) do |f| %>
+  <section class="entries__new-content-container">
+    <div class="entries__new-info-container">
+      <div class="entries__new-emotion-selector-container">
+        <p>How are you feeling?</p>
+        <%= f.select :emotion, %w[Connected Calm Good Thoughtful Relaxed Sad Bored Tired Meh Disappointed Excited Pleased Happy Cheerful Upbeat Angry Anxious Peeved Tense Irate] %>
+      </div>
 
-  <% if entry.errors.any? %>
-    <div>
-      <ul>
-        <% entry.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+      <div class="entries__new-emotion-selector-container">
+        <p>How's your energy?</p>
+        <%= f.select :energy_level, %w[1 2 3 4 5 6 7 8 9 10] %>
+      </div>
+
+      <div class="entries__new-private-public-container">
+        <p>Public Entry?</p>
+
+        <div class="app__form-partial-public-checkbox">
+          <%= f.check_box :is_public %>
+        </div>
+
+      </div>
     </div>
-  <% end %>
 
-  <div>
-    <%= form.label :text, "Entry Text" %>
-    <%= form.text_area :text, rows: 5, placeholder: 'Write your entry here...' %>
-  </div>
+    <div class="entries__new-tags-container">
+      <% tag_options = {
+        "company" => %w[Friends Family Pets Strangers Myself Colleagues],
+        "activity" => %w[Cooking Eating Working\ out Cleaning Journaling Meditating Working Dancing Water\ Aerobics],
+        "location" => %w[Home Library School Work Park Outside Gym Restaurant Club]
+      } %>
 
-  <div>
-    <%= form.label :emotion %>
-    <%= form.select :emotion, options_for_select(['Happy', 'Sad', 'Excited', 'Angry', 'Anxious', 'Other'], entry.emotion), { prompt: 'Select Emotion' } %>
-  </div>
+      <h2>Who are you with?</h2>
+      <div class="entries__new-company-tags-container">
+        <% tag_options["company"].each do |option| %>
+          <%= f.check_box :company, { multiple: true, id: "company_#{option.parameterize}" }, option%>
+          <%= f.label :company, option, for: "company_#{option.parameterize}", class: 'entries__new-tag-label' %>
+        <% end %>
+      </div>
 
-  <div>
-    <%= form.label :location %>
-    <%= form.text_field :location, placeholder: 'Where are you?' %>
-  </div>
+      <h2>What are you doing?</h2>
+      <div class="entries__new-activity-tags-container">
+        <% tag_options["activity"].each do |option| %>
+          <%= f.check_box :activity, { multiple: true, id: "activity_#{option.parameterize}" }, option %>
+          <%= f.label :activity, option, for: "activity_#{option.parameterize}", class: 'entries__new-tag-label' %>
+        <% end %>
+      </div>
 
-  <div>
-    <%= form.label :people, "People Involved" %>
-    <%= form.text_field :people, placeholder: 'Who are you with?' %>
-  </div>
+      <h2>Where are you?</h2>
+      <div class="entries__new-location-tags-container">
+        <% tag_options["location"].each do |option| %>
+          <%= f.check_box :location, { multiple: true, id: "location_#{option.parameterize}" }, option %>
+          <%= f.label :location, option, for: "location_#{option.parameterize}", class: 'entries__new-tag-label' %>
+        <% end %>
+      </div>
+    </div>
 
-  <div>
-    <%= form.label :activity %>
-    <%= form.text_field :activity, placeholder: 'What are you doing?' %>
-  </div>
+    <div class="entries__new-text-container">
+      <%= f.label :text, "Write some notes about your day" %>
+      <%= f.text_area :text, rows: 10, placeholder: "Write your entry here...", class: "entries__new-text-field" %>
+    </div>
 
-  <div>
-    <%= form.label :energy_level, "Energy Level (1-10)" %>
-    <%= form.number_field :energy_level, in: 1..10, step: 1, placeholder: 'Rate your energy level' %>
-  </div>
+    <%= f.submit class: 'entries__new-submit-button' %>
 
-  <div>
-    <%= form.label :is_public, "Make this entry public?" %>
-    <%= form.check_box :is_public %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  </section>
 <% end %>

@@ -9,7 +9,7 @@ RSpec.describe "entries/show.html.erb", type: :view do
       user: user,
       emotion: "Happy",
       energy_level: "8",
-      private: "true",
+      is_public: "true",
       company: ['Friends', 'Family'].to_json,
       activity: ['Cooking', 'Dancing'].to_json,
       location: ['Home', 'Gym'].to_json,
@@ -61,7 +61,7 @@ RSpec.describe "entries/show.html.erb", type: :view do
 
   it "has all comments with user email and text" do
     comments.each do |comment|
-      expect(rendered).to have_selector("div.entries__show-comment-container p", text: comment.user.email)
+      expect(rendered).to have_selector("div.entries__show-comment-container p", text: comment.user.username)
       expect(rendered).to have_selector("div.entries__show-comment-container p", text: comment.text)
     end
   end

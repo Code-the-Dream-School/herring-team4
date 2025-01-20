@@ -69,12 +69,30 @@
   gap: 30px
 }
 
-.app__navbar_left button {
+.plus-nav-container {
   border: none;
-  border-radius: 50px;
-  padding: 10px;
-  width: 150px;
-  background-color: #D9D9D9;
+  border-radius: 100px;
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.plus-nav {
+  text-decoration: none;
+  color: black;
+  font-size: 30px;
+
+
+}
+
+.app__navbar_left_extra_buttons {
+  display: flex;
+  align-items: center;
+  gap: 20px
 }
 
 .app__navbar_left .navbar-btn {
@@ -172,10 +190,11 @@
 }
 
 
-.dashboard__entry-create p {
-  color: black;
+.dashboard__entry-create .dashboard__plus {
   font-size: 60px !important;
-  margin-top: 20px;
+  margin-top: 5px;
+  text-decoration: none;
+  color: black;
   position: absolute;
 }
 
@@ -250,6 +269,7 @@
 .entries__index-entry-header-left {
   display: flex;
   flex-direction: column;
+  width: 70%;
 }
 
 .entries__index-entry-header-left-tags-container {
@@ -277,6 +297,13 @@
   align-items: end;
 }
 
+.entries__index-entry-footer-right {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100px;
+}
 .entries__index-entry-footer-left p {
   margin: 0;
   font-size: 30px;
@@ -287,9 +314,33 @@
   font-size: 35px;
 }
 
+.entries__index-entry-header-right {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.entries__index-entry-header-right img {
+  height: 70px;
+  width: 70px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.entries__index-entry-footer-right img {
+  height: 70px;
+  width: 70px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: solid 1px white;
+}
+
+
 //entries show styles ------------------------------
 
-body.entries.show, body.entries.edit {
+body.entries.show, body.entries.edit, body.entries.friend_entry_show {
   min-height: 100vh;
   overflow-x: hidden;
   background-attachment: fixed;
@@ -334,6 +385,13 @@ body.entries__show-low-energy-unpleasant .entries__show-emotion-label  {
   flex-direction: column;
   position: relative;
   gap: 10px
+}
+
+.entries__show-profile-picture {
+  height: 100px;
+  width: 100px;
+  border-radius: 10px;
+  border: solid 1px white;
 }
 
 .entries__show-emotion-symbol {
@@ -397,6 +455,7 @@ body.entries__show-low-energy-unpleasant .entries__show-emotion-label  {
   background-color: rgba(126, 132, 128, 0.2);
 
   padding: 15px;
+  align-items: end;
   border-radius: 10px;
   max-width: 600px;
   width: 100%;
@@ -458,6 +517,7 @@ body.entries__show-low-energy-unpleasant .entries__show-emotion-label  {
   display: flex;
   flex-direction: column;
   padding: 10px;
+  z-index: 99;
   gap: 10px
 }
 
@@ -468,20 +528,53 @@ body.entries__show-low-energy-unpleasant .entries__show-emotion-label  {
   border-radius: 5px;
   border: 1px solid;
   gap: 15px;
+  width: 100%;
+  justify-content: space-between;
   padding: 5px;
 }
 
-.entries__show-comment-container :first-child {
-  width: 30%;
-  margin: 0px;
-  font-size: 12px;
+.entries__show-comment-container-start {
+  display: flex;
+  align-items: center;
+  gap: 10px
 }
 
-.entries__show-comment-container :last-child {
-  width: 70%;
-  margin: 0px;
-  font-size: 12px;
+.entries__show-comment-container img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
 }
+
+.entries__show-comment-container-text {
+  display: flex;
+  width: 100%;
+  justify-content: start;
+  align-items: center;
+}
+
+.entries__show-comment-container-end {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.entries__show-comment-container-end .btn {
+  padding: 10px;
+}
+
+.entries__show-comment-container-end :first-child {
+
+}
+
+.entries__show-comment-container :first-child {
+
+}
+
+//.entries__show-comment-container :last-child {
+//  width: 70%;
+//  margin: 0px;
+//  font-size: 12px;
+//}
 
 .entries__show-comment-container p {
   margin: 0;
@@ -551,9 +644,9 @@ body.entries__show-low-energy-unpleasant .entries__show-emotion-label  {
 }
 
 .entries__new-private-public-container input[type="checkbox"] {
-  width: 20px; /* Adjust the width */
-  height: 20px; /* Adjust the height */
-  cursor: pointer; /* Adds a pointer cursor for better UX */
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
   font-size: 400px;
 }
 
@@ -662,6 +755,7 @@ input[type="checkbox"]:checked + .entries__new-tag-label {
 .entries__edit-header p {
   margin: 0;
 }
+
 
 
 
@@ -782,6 +876,7 @@ h1 {
 .friend-profile-picture {
     border-radius: 50%;
     object-fit: cover;
+
 }
 
 //log in and sign up styles ------------------------------

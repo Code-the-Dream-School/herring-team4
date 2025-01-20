@@ -20,7 +20,7 @@ RSpec.describe "dashboard/index.html.erb", type: :view do
   end
 
   it "displays the plus sign and the 'Check in' text" do
-    expect(rendered).to have_selector("p.dashboard__plus", text: "﹢")
+    expect(rendered).to have_link("﹢", href: new_entry_path, class: "dashboard__plus")
     expect(rendered).to have_selector("p", text: "Check in")
   end
 

@@ -1,7 +1,15 @@
 require "rails_helper"
 
 RSpec.describe "entries/show.html.erb", type: :view do
-  let(:user) { create(:user) }
+  let(:user) do
+    create(:user).tap do |user|
+      user.profile_picture.attach(
+        io: File.open(Rails.root.join("spec/fixtures/files/default.png")),
+        filename: "default.png",
+        content_type: "image/png"
+      )
+    end
+  end
 
   let(:entry) do
     create(
@@ -23,10 +31,10 @@ RSpec.describe "entries/show.html.erb", type: :view do
       create(:comment, entry: entry, user: user, text: "That sucks!")
     ]
   end
-
   before do
     assign(:entry, entry)
     assign(:comments, comments)
+    allow(view).to receive(:current_user).and_return(user)
     render
   end
 
@@ -59,7 +67,7 @@ RSpec.describe "entries/show.html.erb", type: :view do
     expect(rendered).to have_link("Edit", href: edit_entry_path(entry), class: "btn")
   end
 
-  it "has all comments with user email and text" do
+  it "has all comments with username and text" do
     comments.each do |comment|
       expect(rendered).to have_selector("div.entries__show-comment-container p", text: comment.user.username)
       expect(rendered).to have_selector("div.entries__show-comment-container p", text: comment.text)

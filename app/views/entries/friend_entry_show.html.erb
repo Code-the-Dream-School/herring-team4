@@ -1,6 +1,10 @@
 <section class=" entries__show-content-container">
+  <div class="entries__show-emotion-symbol">
+    <%= image_tag(@entry.user.profile_picture, class: 'entries__show-profile-picture') %>
+  </div>
+
   <div class="entries__show-emotion-header">
-    <p>I'm feeling</p>
+    <p><%= @entry.user.username %> is feeling</p>
     <p class="entries__show-emotion-label"><%= @entry.emotion %></p>
   </div>
 
@@ -24,42 +28,36 @@
     <p><%= @entry.text %></p>
   </div>
 
-  <div class="entries__show-options-container">
-    <button>Private</button>
-    <%= link_to 'Edit', edit_entry_path(@entry), class: 'btn' %>
-    <%= link_to 'Delete', entry_path(@entry), class: 'btn', data: { turbo_method: :delete } %>
-  </div>
-
-
-  <% if @entry.comments.present? %>
-    <div class="entries__show-comments-container">
-      <p>Comments</p>
-      <% @entry.comments.each do |comment| %>
-        <div class="entries__show-comment-container">
-          <div class="entries__show-comment-container-start">
-            <%= image_tag(comment.user.profile_picture) %>
-            <p><%= comment.user.username %>:</p>
-          </div>
-
-          <div class="entries__show-comment-container-text">
-            <p><%= comment.text %></p>
-          </div>
-
-          <div class="entries__show-comment-container-end">
-              <%= link_to entry_comment_path(@entry, comment), class: "btn btn-primary btn-sm" do %>
-                <i class="bi bi-eye"></i>
-              <% end %>
-
-
-              <%= button_to entry_comment_path(@entry, comment), method: :delete, class: "btn btn-danger btn-sm" do %>
-                <i class="bi bi-trash"></i>
-              <% end %>
-          </div>
+  <div class="entries__show-comments-container">
+    <p>Comments</p>
+    <%= link_to 'Comment', new_entry_comment_path(@entry), class: "btn btn-primary" %>
+    <% @entry.comments.each do |comment| %>
+      <div class="entries__show-comment-container">
+        <div class="entries__show-comment-container-start">
+          <%= image_tag(comment.user.profile_picture) %>
+          <p><%= comment.user.username %>:</p>
         </div>
-      <% end %>
-    </div>
-  <% end %>
 
+        <div class="entries__show-comment-container-text">
+          <p><%= comment.text %></p>
+        </div>
+
+        <div class="entries__show-comment-container-end">
+          <% if comment.user == current_user %>
+
+            <%= link_to entry_comment_path(@entry, comment), class: "btn btn-primary btn-sm" do %>
+              <i class="bi bi-eye"></i>
+            <% end %>
+
+
+            <%= button_to entry_comment_path(@entry, comment), method: :delete, class: "btn btn-danger btn-sm" do %>
+              <i class="bi bi-trash"></i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
   <div class="entries__show-blob">
     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="200%" id="blobSvg">

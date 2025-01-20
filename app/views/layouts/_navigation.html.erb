@@ -1,22 +1,28 @@
 <section class="app__navbar">
+
   <div class="app__navbar_left">
 
-    <%= link_to 'My Entries', entries_path, class: 'navbar-btn' %>
-    <%= link_to 'My Friends', friend_entries_path, class: 'navbar-btn' %>
-    <%= link_to 'Settings', '#', class: 'navbar-btn' %>
+    <div class="plus-nav-container">
+      <%= link_to '﹢', dashboard_index_path, class: 'plus-nav' %>
+    </div>
+
+    <div class="app__navbar_left_extra_buttons">
+      <%= link_to 'Profile', profile_path, class: 'navbar-btn' %>
+      <%= link_to 'My Entries', entries_path, class: 'navbar-btn' %>
+      <%= link_to 'My Friends', friend_entries_path, class: 'navbar-btn' %>
+
+      <%# if current_user.notification&.persisted? %>
+      <%#= link_to 'Reminders', notification_path(current_user.notification), class: 'navbar-btn' %>
+      <%# else %>
+
+      <%#= link_to 'Reminders', new_notification_path, class: 'navbar-btn' %>
+      <%# end %>
+
+      <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }, class: 'navbar-btn' %>
 
 
-    <% if current_user.notification&.persisted? %>
-      <%= link_to 'Schedule', notification_path(current_user.notification), class: 'navbar-btn' %>
-    <% else %>
 
-      <%= link_to 'Schedule', new_notification_path, class: 'navbar-btn' %>
-    <% end %>
-
-    <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }, class: 'navbar-btn' %>
-
-    <%= link_to 'Profile', profile_path, class: 'navbar-btn' %>
-
+    </div>
 
   </div>
 

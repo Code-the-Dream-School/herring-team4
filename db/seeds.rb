@@ -35,11 +35,21 @@ end
 
 # add a default pic to each user
 users.each do |user|
+
+  avatar_url = "https://loremflickr.com/500/500"
+  file = URI.open(avatar_url)
+
   user.profile_picture.attach(
-    io: File.open(default_image_path),
-    filename: 'default.png',
+    io: file,
+    filename: "#{user.username}.jpg",
     content_type: 'image/png'
   )
+
+  # user.profile_picture.attach(
+  #   io: File.open(default_image_path),
+  #   filename: 'default.png',
+  #   content_type: 'image/png'
+  # )
 end
 
 # make all users friends with user 1
@@ -82,5 +92,17 @@ first_user_entries.each do |entry|
       text: 'this is a random comment'
     )
   end
-
 end
+
+entries = Entry.all
+entries.each do |entry|
+  users.each do |user|
+    Comment.find_or_create_by!(
+      entry: entry,
+      user: user,
+      text: Faker::Lorem.sentence(word_count: 10)
+    )
+  end
+end
+
+

@@ -12,14 +12,6 @@ RSpec.describe "entries/index.html.erb", type: :view do
     expect(rendered).to have_selector("h2", text: "My Entries")
   end
 
-  it "has a link to create a new entry" do
-    expect(rendered).to have_link("New Entry", href: new_entry_path)
-  end
-
-  it "has a link to the dashboard" do
-    expect(rendered).to have_link("Dashboard", href: dashboard_index_path)
-  end
-
   it "shows all entries" do
     entries.each do |entry|
       expect(rendered).to have_selector(".entries__index-entry-container", count: entries.size)

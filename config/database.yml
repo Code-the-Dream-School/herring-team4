@@ -79,6 +79,8 @@ test:
 #
 production:
   <<: *default
-  database: herring-team4_production
-  username: herring-team4
-  password: <%= ENV["HERRING-TEAM4_DATABASE_PASSWORD"] %>
+  url: <%= Rails.application.credentials.render_postgres[:prod_uri] %>
+  sslmode: "require"
+#  database: herring-team4_production
+#  username: herring-team4
+#  password: <%#= ENV["HERRING-TEAM4_DATABASE_PASSWORD"] %>

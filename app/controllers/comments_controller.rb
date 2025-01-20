@@ -26,7 +26,7 @@ before_action :authorize_friend!, only: [:create, :new]
     @comment.user = current_user
 
     if @comment.save
-      redirect_to [@entry, @comment], notice: 'Comment was successfully created.'
+      redirect_to friend_entry_show_path(@entry), notice: 'Comment was successfully created.'
     else
       render :new, alert: 'Unable to save comment.'
     end
@@ -43,9 +43,9 @@ before_action :authorize_friend!, only: [:create, :new]
   def destroy
     if @comment.user == current_user || current_user.friend_of?(@entry.user) || @entry.user == current_user
       @comment.destroy
-      redirect_to friend_entries_path, notice: 'Comment was successfully deleted.'
+      redirect_to friend_entry_show_path(@entry), notice: 'Comment was successfully deleted.'
     else
-      redirect_to friend_entries_path, alert: 'You are not authorized to delete comment.'
+      redirect_to friend_entry_show_path(@entry), alert: 'You are not authorized to delete comment.'
     end
   end
 

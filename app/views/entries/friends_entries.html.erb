@@ -9,7 +9,10 @@
           <p><%= entry.created_at.strftime("%a %b %-d %l:%M %p") %></p>
 
           <div class="entries__index-entry-header-left-tags-container">
-            <% all_tags = JSON.parse(entry.company) + JSON.parse(entry.activity) + JSON.parse(entry.location) %>
+            <% company_tags = entry.company.present? ? JSON.parse(entry.company) : [] %>
+            <% activity_tags = entry.activity.present? ? JSON.parse(entry.activity) : [] %>
+            <% location_tags = entry.location.present? ? JSON.parse(entry.location) : [] %>
+            <% all_tags = company_tags + activity_tags + location_tags %>
             <% all_tags.each do |tag| %>
               <% unless tag == "0" %>
                 <p><%= tag %></p>

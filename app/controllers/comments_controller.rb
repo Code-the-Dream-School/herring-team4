@@ -41,7 +41,7 @@ before_action :authorize_friend!, only: [:create, :new]
   end 
 
   def destroy
-    if @comment.user == current_user || current_user.friend_of?(@entry.user)
+    if @comment.user == current_user || current_user.friend_of?(@entry.user) || @entry.user == current_user
       @comment.destroy
       redirect_to friend_entries_path, notice: 'Comment was successfully deleted.'
     else

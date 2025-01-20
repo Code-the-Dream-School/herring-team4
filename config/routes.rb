@@ -7,28 +7,30 @@ Rails.application.routes.draw do
 
   get 'dashboard/index'
 
-
   get "friend/entries" => "entries#friends_entries"
-
   get "friend/entry/:id" => "entries#friend_entry_show", as: :friend_entry_show
 
   resources :reactions, only: [:create]
 
   resources :entries do
     resources :reactions, only: [:new, :create]
+
+    collection do
+      get 'dashboard'
+      get 'search'
+    end
+
   end
 
   get 'profile', to: 'users#show', as: 'profile'
 
-
   resources :friendships, only: [:index, :show] do
-    collection do 
-    post :add_friend
-    delete :remove_friend
-    get :search
+    collection do
+      post :add_friend
+      delete :remove_friend
+      get :search
     end
   end
-
 
   resources :entries do
     resources :comments, only: [:index, :show, :new, :create, :edit, :update, :destroy]

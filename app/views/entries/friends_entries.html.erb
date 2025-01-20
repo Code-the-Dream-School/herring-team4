@@ -9,7 +9,10 @@
           <p><%= entry.created_at.strftime("%a %b %-d %l:%M %p") %></p>
 
           <div class="entries__index-entry-header-left-tags-container">
-            <% all_tags = JSON.parse(entry.company) + JSON.parse(entry.activity) + JSON.parse(entry.location) %>
+            <% company_tags = entry.company.present? ? JSON.parse(entry.company) : [] %>
+            <% activity_tags = entry.activity.present? ? JSON.parse(entry.activity) : [] %>
+            <% location_tags = entry.location.present? ? JSON.parse(entry.location) : [] %>
+            <% all_tags = company_tags + activity_tags + location_tags %>
             <% all_tags.each do |tag| %>
               <% unless tag == "0" %>
                 <p><%= tag %></p>
@@ -18,10 +21,8 @@
           </div>
         </div>
 
-        <!--        <div class="entries__index-entry-header-right">-->
-        <%#= image_tag(entry.user.profile_picture, class: "friends_entries_avatar") %>
-        <!--          <p><%#= entry.user.username %></p>-->
-        <!--        </div>-->
+        <div class="entries__index-entry-header-right">
+        </div>
       </div>
 
       <div class="entries__index-entry-footer">
@@ -34,7 +35,6 @@
           <%= image_tag(entry.user.profile_picture, class: "friends_entries_avatar") %>
           <p><%= entry.user.username %></p>
         </div>
-      </div>
       </div>
 
 
@@ -70,62 +70,6 @@
     </section>
   <% end %>
 </section>
-
-
-<h1>My Friend's Entries</h1>
-
-
-
-
-<div class="entries-container">
-  <% @entries.each do |entry| %>
-    <div class="entry-card">
-      <h3>
-        <% if entry.user.profile_picture.attached? %>
-          <%= image_tag url_for(entry.user.profile_picture), width: 50, height: 50,
-                        alt: "#{entry.user.username}",
-                        class: "friend-profile-picture" %>
-        <% end %> <%= entry.user.username %></h3>
-      <p><strong>Entry:</strong> <%= entry.text.truncate(50) %></p>
-
-      <div class="entry-actions">
-        <%= form_with model: Reaction.new, url: reactions_path, local: true do |form| %>
-          <%= form.hidden_field :entry_id, value: entry.id %>
-          <%= form.text_area :emote, placeholder: "Add your reaction", class: 'reaction-input' %>
-          <%= form.submit "React", class: 'action-button react-button' %>
-        <% end %>
-      </div>
-
-      <div class="entry-reactions">
-        <% entry.reactions.each do |reaction| %>
-          <p><strong><%= reaction.user.email %>:</strong> <%= reaction.emote %></p>
-        <% end %>
-      </div>
-
-      <%= link_to 'Comment', new_entry_comment_path(entry), class: "btn btn-primary btn-sm" %>
-
-      <div class="entry-comments">
-        <% entry.comments.each do |comment| %>
-          <p>
-            <strong><%= comment.user.username %>: </strong>
-            <%= comment.text %>
-            <span>
-              <% if comment.user == current_user %>
-           <%= link_to entry_comment_path(entry, comment), class: "btn btn-primary btn-sm" do %>
-            <i class="bi bi-eye"></i> 
-          <% end %></span>
-
-                <span><%= button_to entry_comment_path(entry, comment), method: :delete, class: "btn btn-danger btn-sm" do %><i class="bi bi-trash"></i></span>
-                  <% end %>
-                  </p>
-
-              <% end %>
-        <% end %>
-      </div>
-
-    </div>
-  <% end %>
-</div>
 
 <script>
     document.addEventListener('turbo:load', () => {

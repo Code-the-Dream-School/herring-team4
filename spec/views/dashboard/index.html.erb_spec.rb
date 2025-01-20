@@ -2,9 +2,11 @@ require "rails_helper"
 
 RSpec.describe "dashboard/index.html.erb", type: :view do
   let(:user_stub) { instance_double("User", email: "test@example.com", username: "stubbed_user", notification: nil) }
+  include Devise::Test::ControllerHelpers
 
   before do
     allow(view).to receive(:current_user).and_return(user_stub)
+    allow(view).to receive(:user_signed_in?).and_return(true)
     render template: "dashboard/index", layout: "layouts/application"
   end
 
@@ -26,8 +28,8 @@ RSpec.describe "dashboard/index.html.erb", type: :view do
     expect(rendered).to have_selector("p", text: "Check in")
   end
 
-  it "displays the '_navigation' partial" do
-    expect(view).to render_template(partial: "layouts/_navigation")
-  end
+    it "displays the '_navigation' partial" do
+      expect(view).to render_template(partial: "layouts/_navigation")
+    end
 
 end

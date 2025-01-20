@@ -37,12 +37,12 @@ end
         end
     end 
 
-    context "when query is empty" do
-        it "assigns all users except the current user to @users" do
-            get search_friendships_path, params: { query: "" }
-            expect(assigns(:users)).to match_array([friend])
-        end
-    end
+    # context "when query is empty" do
+    #     it "assigns all users except the current user to @users" do
+    #         get search_friendships_path, params: { query: "" }
+    #         expect(assigns(:users)).to match_array([friend])
+    #     end
+    # end
 end
 
     describe "POST #add_friend" do

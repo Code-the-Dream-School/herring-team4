@@ -60,7 +60,7 @@
         </div>
 
         <div class="entries__show-comment-container-end">
-          <% if (comment.user = current_user) %>
+          <% if (comment.user == current_user) %>
 
             <%= link_to entry_comment_path(@entry, comment), class: "btn btn-primary btn-sm" do %>
               <i class="bi bi-eye"></i>

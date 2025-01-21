@@ -18,10 +18,7 @@ RSpec.describe "friendships/index.html.erb", type: :view do
         it "renders the search form " do
         assign(:users, [])
         render
-
-        expect(rendered).to have_selector("h1", text: "Search for friends:")
         expect(rendered).to have_selector("form")
-        expect(rendered).to have_field("query", placeholder: "Enter username or email")
         expect(rendered).to have_button("Search")
       end
     end

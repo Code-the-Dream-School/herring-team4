@@ -1,7 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe "Comments", type: :request do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) do
+    FactoryBot.create(:user).tap do |user|
+      user.profile_picture.attach(
+        io: File.open(Rails.root.join("spec/fixtures/files/default.png")),
+        filename: "default.png",
+        content_type: "image/png"
+      )
+    end
+  end
   let(:friend) { FactoryBot.create(:user) }
   let(:entry) {FactoryBot.create(:entry, user: friend) }
   let(:comment) { FactoryBot.create(:comment, entry: entry, user: user) }

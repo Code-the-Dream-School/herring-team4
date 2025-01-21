@@ -1,7 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe EntriesController, type: :request do
-  let(:user) { create(:user) }
+  let(:user) do
+    FactoryBot.create(:user).tap do |user|
+      user.profile_picture.attach(
+        io: File.open(Rails.root.join("spec/fixtures/files/default.png")),
+        filename: "default.png",
+        content_type: "image/png"
+      )
+    end
+  end
   let!(:entry1) { create(:entry, user: user, text: 'I love cooking and working out.', emotion: 'Happy', location: ['Home'], company: ['Friends', 'Colleagues'], activity: ['Cooking', 'Working out']) }
   let!(:entry2) { create(:entry, user: user, text: 'Had a sad day at work.', emotion: 'Sad', location: ['Work'], company: ['Strangers', 'Colleagues'], activity: ['Working']) }
   let!(:entry3) { create(:entry, user: user, text: 'Relaxing at the park.', emotion: 'Calm', location: ['Park'], company: ['Pets', 'Myself'], activity: ['Meditating']) }

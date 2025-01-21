@@ -1,6 +1,8 @@
 <section class=" entries__show-content-container">
   <div class="entries__show-emotion-symbol">
-    <%= image_tag(@entry.user.profile_picture, class: 'entries__show-profile-picture') %>
+    <a href="<%= friend_profile_path(@entry.user) %>">
+      <%= image_tag(@entry.user.profile_picture, class: 'entries__show-profile-picture') %>
+    </a>
   </div>
 
   <div class="entries__show-emotion-header">
@@ -33,10 +35,10 @@
     <%= link_to 'Comment', new_entry_comment_path(@entry), class: "btn btn-primary" %>
     <% @entry.comments.each do |comment| %>
       <div class="entries__show-comment-container">
-        <div class="entries__show-comment-container-start">
-          <%= image_tag(comment.user.profile_picture) %>
-          <p><%= comment.user.username %>:</p>
-        </div>
+          <div class="entries__show-comment-container-start">
+            <%= image_tag(comment.user.profile_picture) %>
+            <p><%= comment.user.username %>:</p>
+          </div>
 
         <div class="entries__show-comment-container-text">
           <p><%= comment.text %></p>

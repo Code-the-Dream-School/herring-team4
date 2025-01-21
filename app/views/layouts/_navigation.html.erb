@@ -27,8 +27,14 @@
   </div>
 
   <div class="app__navbar_right">
-    <div class="avatar_container">
-      <p>avatar</p>
-    </div>
+    <%= link_to profile_path(current_user), class: "avatar_link" do %>
+      <div class="dashboard_profile_picture_container">
+        <% if current_user.profile_picture.attached? %>
+          <%= image_tag current_user.profile_picture, class: "img-fluid rounded-circle", alt: "Profile picture of #{current_user.username}", style: "width: 150px; height: 150px; object-fit: cover;"  %>
+        <% else %>
+          <%= image_tag 'default.png', class: "img-fluid rounded-circle", alt: "Default profile picture" %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </section>

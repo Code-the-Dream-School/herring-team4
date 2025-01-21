@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   end
 
   get 'profile', to: 'users#show', as: 'profile'
+  get 'profile/:id', to: 'users#friend_profile', as: 'friend_profile' 
 
   resources :friendships, only: [:index, :show] do
     collection do

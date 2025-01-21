@@ -1,7 +1,7 @@
 <h1> Comments for <%= @entry.text %> </h1> 
 
 <% @comments.each do |comment| %>
-  <div> 
+  <div class="comments-show"> 
   <p> <%= comment.user.username %> : </p> 
     <p>
     <%= comment.text %>

@@ -1,16 +1,14 @@
 
 <h1>Edit comment</h1>
 
+<div class="comments-new">
 <%= form_with model: [@entry, @comment], local: true do |f| %>
     <div>
-    <%= f.label :text, "Edit your comment:" %><br>
-    <%= f.text_area :text, value: @comment.text %>
+    <%= f.text_area :text, value: @comment.text, class: "comment-field" %>
     </div>
-    <%= f.submit 'Update' %>
-
-<br>
+    <div class="actions">
+    <%= f.submit 'Update', class: "comment-btn" %>
+    </div>
+    
 <% end %>
-<div>
-  <%= link_to "Show this comment", entry_comments_path(@entry, @comment) %> |
-  <%= link_to "Back to comment", entry_comments_path(@entry) %>
 </div>

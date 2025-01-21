@@ -1,0 +1,70 @@
+<section class="entries__search-container">
+
+  <%= form_with url: search_entries_path, method: :get, local: true do %>
+    <div class="entries__search-form-container">
+      <%= text_field_tag :query, params[:query], placeholder: "Type your search here...", class: "entries__search-field" %>
+      <%= submit_tag "Search Entries", class: 'entries__search-button' %>
+    </div>
+  <% end %>
+
+</section>
+
+<section class="entries__index-all-entries-container">
+
+  <% if @results != nil && @results.empty? %>
+    <p>No entries found</p>
+    <% puts "EMPTY" %>
+  <% end %>
+
+  <%if @results.present? %>
+    <% @results.each do |entry| %>
+      <section
+          class="<%= 'entries__index-' + mood_group(entry.emotion)%> entries__index-entry-container entry-click"
+          data-url="<%= entry_path(entry) %>">
+        <div class="entries__index-entry-header">
+          <div class="entries__index-entry-header-left">
+            <p><%= entry.created_at.strftime("%a %b %-d %l:%M %p") %></p>
+
+            <div class="entries__index-entry-header-left-tags-container">
+              <% all_tags = JSON.parse(entry.company) + JSON.parse(entry.activity) + JSON.parse(entry.location)%>
+              <% all_tags.each do |tag| %>
+                <% unless tag == "0" %>
+                  <p><%=tag %></p>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="entries__index-entry-header-right">
+          </div>
+        </div>
+
+        <div class="entries__index-entry-footer">
+          <div class="entries__index-entry-footer-left">
+            <p><span>I'm feeling </span></p>
+            <p class="entries__show-emotion-label"><%= entry.emotion %></p>
+          </div>
+
+          <div class="entries__index-entry-footer-right">
+          </div>
+        </div>
+      </section>
+    <% end %>
+
+  <% end %>
+
+</section>
+
+<script>
+    document.addEventListener('turbo:load', () => {
+        document.querySelectorAll('.entry-click').forEach((element) => {
+            element.addEventListener('click', () => {
+                console.log('click');
+                const url = element.getAttribute('data-url');
+                if (url) {
+                    window.location = url;
+                }
+            });
+        });
+    });
+</script>

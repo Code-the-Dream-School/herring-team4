@@ -1,11 +1,22 @@
 require "rails_helper"
 
 RSpec.describe "dashboard/index.html.erb", type: :view do
-  let(:user_stub) { instance_double("User", email: "test@example.com", username: "stubbed_user", notification: nil) }
+  # let(:user_stub) { instance_double("User", email: "test@example.com", username: "stubbed_user", notification: nil) }
+
+  let(:user) do
+    FactoryBot.create(:user).tap do |user|
+      user.profile_picture.attach(
+        io: File.open(Rails.root.join("spec/fixtures/files/default.png")),
+        filename: "default.png",
+        content_type: "image/png"
+      )
+    end
+  end
+
   include Devise::Test::ControllerHelpers
 
   before do
-    allow(view).to receive(:current_user).and_return(user_stub)
+    allow(view).to receive(:current_user).and_return(user)
     allow(view).to receive(:user_signed_in?).and_return(true)
     render template: "dashboard/index", layout: "layouts/application"
   end

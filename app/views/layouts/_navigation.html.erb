@@ -7,19 +7,17 @@
     </div>
 
     <div class="app__navbar_left_extra_buttons">
-      <%= link_to 'Profile', profile_path, class: 'navbar-btn' %>
-      <%= link_to 'My Entries', dashboard_entries_path, class: 'navbar-btn' %>
-      <%= link_to 'My Friends', friend_dashboard_entries_path, class: 'navbar-btn' %>
+      <%= link_to 'Entries', dashboard_entries_path, class: 'navbar-btn' %>
+      <%= link_to 'Friends', friend_dashboard_entries_path, class: 'navbar-btn' %>
 
       <% if current_user.notification&.persisted? %>
-      <%= link_to 'Reminders', notification_path(current_user.notification), class: 'navbar-btn' %>
+        <%= link_to 'Reminders', notification_path(current_user.notification), class: 'navbar-btn' %>
       <% else %>
 
-      <%= link_to 'Reminders', new_notification_path, class: 'navbar-btn' %>
+        <%= link_to 'Reminders', new_notification_path, class: 'navbar-btn' %>
       <% end %>
 
       <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }, class: 'navbar-btn' %>
-
 
 
     </div>
@@ -27,14 +25,10 @@
   </div>
 
   <div class="app__navbar_right">
-    <%= link_to profile_path(current_user), class: "avatar_link" do %>
-      <div class="dashboard_profile_picture_container">
-        <% if current_user.profile_picture.attached? %>
-          <%= image_tag current_user.profile_picture, class: "img-fluid rounded-circle", alt: "Profile picture of #{current_user.username}", style: "width: 150px; height: 150px; object-fit: cover;"  %>
-        <% else %>
-          <%= image_tag 'default.png', class: "img-fluid rounded-circle", alt: "Default profile picture" %>
-        <% end %>
-      </div>
-    <% end %>
+    <div class="avatar_container">
+      <%= link_to user_path(current_user) do %>
+        <%= image_tag(current_user.profile_picture) %>
+      <% end %>
+    </div>
   </div>
 </section>

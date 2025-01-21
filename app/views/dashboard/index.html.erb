@@ -1,9 +1,12 @@
 <section class="dashboard__main-container">
   <p>How are you feeling right now?</p>
+
+  <% if current_user.calculate_streak > 0 %>
+    <p class="dashboard-streak-text">Streak of <%= current_user.calculate_streak%> </p>
+  <% end %>
   <div class="dashboard__spinner"></div>
   <div class="dashboard__create-entry-container">
     <div class="dashboard__entry-create">
-
       <%=link_to "﹢", new_entry_path, class: "dashboard__plus" %>
     </div>
     <p>Check in</p>

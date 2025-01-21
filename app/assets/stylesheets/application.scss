@@ -42,7 +42,7 @@
   --low_unpleasant_base: #1a1c2c;
 
   --high_pleasant_text_base: #fbd454;
-  --low_pleasant_text_base:  #9bfb54;
+  --low_pleasant_text_base: #9bfb54;
   --high_unpleasant_text_base: #fb5454;
   --low_unpleasant_text_base: #547bfb;
 
@@ -304,6 +304,7 @@
   align-items: center;
   width: 100px;
 }
+
 .entries__index-entry-footer-left p {
   margin: 0;
   font-size: 30px;
@@ -375,8 +376,42 @@ body.entries__show-low-energy-unpleasant {
   background: linear-gradient(0deg, #1a252c 0%, #000000 100%);
 }
 
-body.entries__show-low-energy-unpleasant .entries__show-emotion-label  {
+body.entries__show-low-energy-unpleasant .entries__show-emotion-label {
   color: var(--low_unpleasant_text_base)
+}
+
+.entries__dashboard-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.entries__dashboard-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.entries__dashboard-option {
+  border: 1px solid white;
+  border-radius: 5px;
+  display: flex;
+  height: 150px;
+  width: 100%;
+  max-width: 600px;
+  justify-content: center;
+  align-items: center;
+}
+
+.entries__dashboard-option p {
+  font-size: 25px;
+  color: white;
 }
 
 .entries__show-content-container {
@@ -604,7 +639,7 @@ body.entries__show-low-energy-unpleasant .entries__show-emotion-label  {
   color: white;
 }
 
-.entries__new-header  {
+.entries__new-header {
   color: white;
   border: 1px solid;
   width: 100%;
@@ -736,7 +771,7 @@ input[type="checkbox"]:checked + .entries__new-tag-label {
   max-width: 600px;
 }
 
-.entries__edit-header  {
+.entries__edit-header {
   display: flex;
   justify-content: center;
   color: white;
@@ -757,6 +792,85 @@ input[type="checkbox"]:checked + .entries__new-tag-label {
 }
 
 
+//----------------- search styles
+
+.entries__search-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.entries__search-form-container {
+  display: flex;
+  gap: 10px;
+  max-width: 700px;
+  margin: auto;
+  padding: 0 10px;
+
+}
+
+.entries__search-field {
+  background-color: black;
+  color: white;
+  border: none;
+  border-bottom: solid white 1px;
+  font-style: italic;
+  outline: none;
+  width: 100%;
+  font-size: 25px;
+}
+
+.entries__search-button {
+  background-color: black;
+  border: solid 1px white;
+  color: white;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+
+//log in and sign up styles ------------------------------
+.login-card {
+  background-color: #000000;
+  color: #d4cbcb;
+  width: 30%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.card-header {
+  margin-left: 30%;
+}
+
+.login {
+  background-color: black;
+  color: white;
+  width: 100%;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin-top: 20px;
+  margin-bottom: 100px;
+  max-width: 600px;
+}
+
+.sign-up {
+  background-color: black;
+  color: white;
+  width: 100%;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin-top: 20px;
+  margin-bottom: 100px;
+  max-width: 600px;
+
+}
 
 
 //-------------------- old styles
@@ -856,69 +970,54 @@ h1 {
 }
 
 .delete-button:hover {
-    background-color: #c82333;
+  background-color: #c82333;
+}
+
+.friendships__index-friend-list-container {
 }
 
 .friend-list {
-    list-style: none;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
 
+.friendships__index-friend-card {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 700px;
+  padding: 20px;
 }
 
 .a-friend {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  width: 500px;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  margin: auto;
 }
+
+.friendships__show-container {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
 
 .friend-profile-picture {
-    border-radius: 50%;
-    object-fit: cover;
-
-}
-
-//log in and sign up styles ------------------------------
-.login-card {
-  background-color: #000000;
-  color: #d4cbcb;
-  width: 30%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 100px;
-  margin-bottom: 100px;
-}
-
-.card-header {
-  margin-left: 30%;
-}
-
-.login {
-  background-color: black;
-  color: white;
-  width: 100%;
-  border: 1px solid white;
   border-radius: 10px;
-  padding: 5px 10px;
-  margin-top: 20px;
-  margin-bottom: 100px;
-  max-width: 600px;
+  object-fit: cover;
 }
 
-.sign-up {
-  background-color: black;
-  color: white;
-  width: 100%;
-  border: 1px solid white;
-  border-radius: 10px;
-  padding: 5px 10px;
-  margin-top: 20px;
-  margin-bottom: 100px;
-  max-width: 600px;
 
-}
+
+
 
 //comments styles ------------------------------
 

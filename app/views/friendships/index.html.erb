@@ -1,28 +1,36 @@
-<%= link_to "My friends", friendship_path(:id) %>
-<h1> Search for friends: </h1>
+<section class="entries__search-container">
+  <%= form_with url: search_friendships_path, method: :get, local: true do %>
+    <div class="entries__search-form-container">
+      <%= text_field_tag :query, params[:query], placeholder: "Enter username or email here...", class: "entries__search-field" %>
+      <%= submit_tag "Search Friends", class: 'entries__search-button' %>
+    </div>
+  <% end %>
 
-<%= form_with url: search_friendships_path, method: :get, local: true do |f| %>
-  <%= f.label :query, "Search for friends" %>
-  <%=f.text_field :query, placeholder: "Enter username or email" %>
-  <%= f.submit "Search" %>
-  <%end %> 
+</section>
+
+<section class="entries__index-all-entries-container">
 
   <% if @users&.any? %>
-   <ul class= "friend-list">
-    <% @users.each do |user| %>
-     <li> 
-      <% if user.profile_picture.attached? %>
-        <%= image_tag url_for(user.profile_picture), width: 50, height: 50, 
-        alt:"#{user.username}",
-        class: "friend-profile-picture"  %>
+
+      <ul class="friend-list">
+        <% @users.each do |user| %>
+          <li  class="friendships__index-friend-card">
+            <% if user.profile_picture.attached? %>
+              <%= image_tag url_for(user.profile_picture), width: 100, height: 100,
+                            alt: "#{user.username}",
+                            class: "friend-profile-picture" %>
+            <% end %>
+            <%= user.username %>
+            <% if current_user.friendships.exists?(friend_id: user.id) %>
+              <%= button_to "Remove", remove_friend_friendships_path(email: user.email, username: user.username), method: :delete, class: "btn btn-danger" %>
+            <% else %>
+              <%= button_to "Add Friend", add_friend_friendships_path(email: user.email, username: user.username), method: :post, class: "btn btn-primary" %>
+            <% end %>
+          </li>
         <% end %>
-      <%= user.username %> 
-      <% if current_user.friendships.exists?(friend_id: user.id) %>
-      <%= button_to "Remove", remove_friend_friendships_path(email: user.email, username: user.username), method: :delete, class: "btn btn-danger" %>
-      <% else %>
-         <%= button_to "Add Friend", add_friend_friendships_path(email: user.email, username: user.username), method: :post, class: "btn btn-primary" %>
-        <% end %>
-     </li>
-     <% end %>
-    </ul> 
-      <% end %>  
+      </ul>
+
+
+  <% end %>
+
+</section>

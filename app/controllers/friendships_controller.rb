@@ -13,8 +13,9 @@ class FriendshipsController < ApplicationController
 
   def search
     @query = params[:query]
+
     if @query.present?
-     @users = User.search_by_username_or_email(@query) 
+     @users = User.search_by_username_or_email(@query)
                   .where.not(id: current_user.id)
     else
       @users = User.where.not(id: current_user.id)

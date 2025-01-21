@@ -47,7 +47,10 @@ class EntriesController < ApplicationController
 
   def friend_entry_show
     @entry = Entry.find_by(id: params[:id])
+  end
 
+  def friend_dashboard
+    render :friend_entries_dashboard
   end
 
   def dashboard

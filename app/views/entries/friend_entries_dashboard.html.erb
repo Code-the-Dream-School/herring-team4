@@ -1,0 +1,32 @@
+<section class="entries__dashboard-container">
+
+  <div class="entries__dashboard-options">
+
+    <div class="entries__dashboard-option entries__view-entries" data-url="<%= friend_entries_path %>">
+      <p>View Friend Entries</p>
+    </div>
+
+    <div class="entries__dashboard-option" data-url="<%= friendship_path(:id) %>" >
+      <p>My Friends</p>
+    </div>
+
+    <div class="entries__dashboard-option" data-url="<%= search_friendships_path %>" >
+      <p>Search Friends</p>
+    </div>
+  </div>
+
+</section>
+
+<script>
+    document.addEventListener('turbo:load', () => {
+        document.querySelectorAll('.entries__dashboard-option').forEach((element) => {
+            element.addEventListener('click', () => {
+                console.log('click');
+                const url = element.getAttribute('data-url');
+                if (url) {
+                    window.location = url;
+                }
+            });
+        });
+    });
+</script>

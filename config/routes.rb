@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     collection do
       get 'dashboard'
       get 'search'
+      get "friend_dashboard"
     end
 
   end

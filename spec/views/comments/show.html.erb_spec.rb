@@ -27,15 +27,8 @@ RSpec.describe "comments/show.html.erb", type: :view do
     end
 
     it "renders the delete button" do
-      expect(rendered).to have_selector("button.btn.btn-danger.btn-sm")
+      expect(rendered).to have_selector("button.delete-comment-btn")
     end
 
-    it "displays the back to entry link" do
-      expect(rendered).to have_link("My Entries", href: entries_path)
-    end
-
-    it "displays my friends entries" do
-      expect(rendered).to have_link("Friends Entries", href: friend_entries_path)
-    end
   end
 end

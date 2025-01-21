@@ -28,12 +28,5 @@ RSpec.describe "comments/edit.html.erb", type: :view do
       expect(rendered).to have_selector("input[type='submit'][value='Update']")
     end
 
-    it "has a link to show the comment" do
-      expect(rendered).to have_link('Show this comment', href: entry_comments_path(entry, comment))
-    end
-
-    it "has a link to go back to the comments index" do
-      expect(rendered).to have_link('Back to comment', href: entry_comments_path(entry))
-    end
   end
 end

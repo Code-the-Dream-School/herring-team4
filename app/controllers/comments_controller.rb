@@ -34,7 +34,7 @@ before_action :authorize_friend!, only: [:create, :new]
 
   def update
     if @comment.update(comment_params)
-      redirect_to [@entry, @comment], notice: 'Comment was successfully updated.'
+      redirect_to friend_entry_show_path(@entry), notice: 'Comment was successfully updated.'
     else
       render :edit, alert: 'Unable to update comment.'
     end
@@ -47,6 +47,17 @@ before_action :authorize_friend!, only: [:create, :new]
     else
       redirect_to friend_entry_show_path(@entry), alert: 'You are not authorized to delete comment.'
     end
+  end
+
+  def destroy_another
+    @comment = @entry.comments.find_by(id: params[:id])
+    if @comment.user == current_user || @entry.user == current_user
+      @comment.destroy
+       flash[notice:] = 'Comment was successfully deleted.'
+    else
+       flash[alert:] = 'You are not authorized to delete comment.'
+    end
+     redirect_to request.referer || entry_path(@entry)
   end
 
   private

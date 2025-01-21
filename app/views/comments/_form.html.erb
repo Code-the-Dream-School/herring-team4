@@ -12,12 +12,12 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.text_area :text %>
+  <div class="comment-field-box">
+    <%= f.text_area :text, class: "comment-field" %>
   </div>
 
 
   <div class="actions">
-    <%= f.submit 'Comment', class: "btn btn-primary btn-sm" %>
+    <%= f.submit 'Comment', class: "comment-btn" %>
   </div>
 <% end %>

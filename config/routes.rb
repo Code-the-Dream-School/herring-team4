@@ -31,7 +31,9 @@ Rails.application.routes.draw do
 
 
   resources :entries do
-    resources :comments, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+    resources :comments, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+      delete 'destroy_another', on: :member
+    end
   end
 
   resources :users, only: [:show, :edit, :update] do
